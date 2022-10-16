@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- 웹페이지 보이지는 않지만, 필요한 설정을 해두는 곳이에요.
+             우리가 집을 위해 미리 생각 해놓은 것을 적어두는 곳이라고 할 수 있죠!-->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta property="og:title" content="프로필 링크" />
+        <meta property="og:description" content="..." />
+        <meta property="og:image" content="" />
+        <title>르탄이 - 프로필 링크</title>
+        <style>
+            @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+            * {
+                font-family: "Pretendard",serif;
+            }
+           body{
+            background-color: #44398A;
+           }
+           .profile{
+                width: 100px;
+                height: 100px;
+
+               
+                border-radius: 100%;
+                border: 2px solid white;
+
+                background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F330310953922130762%2F&psig=AOvVaw22FIkyAor7qL81KaNvDQdW&ust=1665988432146000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCICYkNiQ5PoCFQAAAAAdAAAAABAJ');
+                background-position: center;
+                background-size: cover;
+            }
+            .main {
+                color: white;
+                font-size: 20px;
+                margin-top: 30px;
+            }
+            .sub{
+                color:white;
+                font-size: 14px;
+                margin-top: 0;
+                margin-bottom: 30px;
+            }
+            .wrap{
+                /*background-color: #1fcecb;*/
+                width: 300px;
+                margin: 30px auto 0px auto;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            .wrap > a {
+                width: 300px;
+                height: 50px;
+
+                background-color: white;
+                border-radius: 8px;
+
+                margin-bottom: 10px;
+
+                font-size: 14px;
+                font-weight: bold;
+                color:#44398A;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                text-decoration: none;
+
+                box-shadow: 3px 3px 5px 0px black;
+
+            }
+
+            .wrap > a:hover{
+                background-color:#f2f2f2;
+                
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="wrap">
+            <div class="profile"></div>
+            <h1 class="main">로빈</h1>
+            <p class="sub">...</p>
+            <a target="_blank" href="https://www.instagram.com/40e0d0sky/">인스타그램</a>
+            <a target="_blank" href="https://twitter.com/1fcecb">트위터</a>
+            
+        </div>
+       
+    </body>
+</html>
