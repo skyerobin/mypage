@@ -84,6 +84,13 @@
                   margin-right: 10px;  // 버튼 사이에 오른쪽 여백을 추가합니다.
             }
 
+            #memo{
+                    display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
             .search{
                 display: flex;
                 flex-direction: column;
@@ -110,12 +117,13 @@
       </form>
       <ul id="todo-list"></ul>
         </div>
+        <div id="memo">
          <textarea id="myMemo"></textarea>
           <input id="memoTitle" type="text" placeholder="메모 제목"><button id="saveBtn">저장하기</button>
           <button id="newMemoBtn">새 메모 작성</button>
           <select id="memoList" onchange="loadMemo()"></select>
           <button id="deleteBtn">삭제하기</button> <button id="editBtn">수정하기</button>
-
+        </div> 
        <form class="search" id="search"> 
             <select class="SelectSearch" name="WhichSearch"> 
               <option id="google" value="google">Google</option> 
