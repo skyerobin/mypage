@@ -79,6 +79,13 @@
                 
             }
 
+            #myMemo{
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  margin: auto;
+            }
+
 
             #container {
                   display: flex;
@@ -119,10 +126,11 @@
       </form>
       <ul id="todo-list"></ul>
         </div>
+        <textarea id="myMemo"></textarea><br>
         <div id="container">
-         <textarea id="myMemo"></textarea><br />
-          <input id="memoTitle" type="text" placeholder="메모 제목"><br />
-          <select id="memoList" onchange="loadMemo()"></select> 
+         
+          <input id="memoTitle" type="text" placeholder="메모 제목"><br>
+          <select id="memoList" onchange="loadMemo()"></select><br> 
         </div>
         <div id="btns">
           <button id="saveBtn">저장하기</button>
