@@ -24,7 +24,7 @@
 
                
                 border-radius: 100%;
-                border: 2px solid #0cc;
+                border: 2px solid;
 
                 background-image: url('download_image.png');
                 background-position: center;
@@ -84,7 +84,12 @@
                   margin-right: 10px;  // 버튼 사이에 오른쪽 여백을 추가합니다.
             }
 
-
+            .search{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
 
 
         </style>
@@ -104,7 +109,7 @@
         <input type="text" placeholder="Write a To Do and Press Enter" required />
       </form>
       <ul id="todo-list"></ul>
-     
+        </div>
          <textarea id="myMemo"></textarea>
           <input id="memoTitle" type="text" placeholder="메모 제목"><button id="saveBtn">저장하기</button>
           <button id="newMemoBtn">새 메모 작성</button>
@@ -124,7 +129,7 @@
           <input class="keyword" type="text" name="search" size="9" maxlength="225" value="" autocomplete="off" target="_blank" id="sear" placeholder="🔎">
          </form>
     
-        </div>
+        
       <script src="app.js"></script>
       <script src="clock.js"></script>
       <script src="weather.js"></script>
