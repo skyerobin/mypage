@@ -25,8 +25,6 @@ const Searching = Search.prototype;
             location.href = 'https://www.youtube.com/results?search_query=' + keyword;
           }else if(engine === 'Navershopping'){
             location.href = 'https://search.shopping.naver.com/search/all?query=' + keyword;
-          }else if(engine === 'instagram'){
-            location.href ='https://www.instagram.com/explore/tags/' +keyword;
           }else{
             location.href = 'https://twitter.com/search?q=' + keyword;
           }
