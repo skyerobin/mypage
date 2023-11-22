@@ -18,7 +18,7 @@
            body{
             background-color: ##FFFFF0;
            }
-           .profile{
+           .profile .search{
                 width: 100px;
                 height: 100px;
 
@@ -80,25 +80,20 @@
             }
 
 
-            #myMemo #memoList{
-                      display: flex;
-                      justify-content: center;
-                      align-items: center;
-                              
+            #container {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                        }    
 
-            button {
-                  display: inline-block;
-                  margin-right: 10px;  // 버튼 사이에 오른쪽 여백을 추가합니다.
-                  justify-content: space-between;
-            }
+            #btns {
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    }
+
 
            
-
-            .search{
-               align-items: center;
-               margin-top: 20px auto;
- 
-            }
 
 
         </style>
@@ -119,12 +114,14 @@
       </form>
       <ul id="todo-list"></ul>
         </div>
-        <div id="buttonContainer">
+        <div id="container">
          <textarea id="myMemo"></textarea>
           <input id="memoTitle" type="text" placeholder="메모 제목">
+          <select id="memoList" onchange="loadMemo()"></select> 
+        </div>
+        <div id="btns">
           <button id="saveBtn">저장하기</button>
           <button id="newMemoBtn">새 메모 작성</button>
-          <select id="memoList" onchange="loadMemo()"></select>
           <button id="editBtn">수정하기</button> 
           <button id="deleteBtn">삭제하기</button> 
         </div> 
