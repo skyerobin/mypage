@@ -92,18 +92,22 @@
                   justify-content: center;
                   align-items: center;
                         }    
-
+             #myMemo{
+                 margin: auto;
+                 margin-top: 30px;
+             }
             #btns {
                       display: flex;
                       justify-content: space-between;
                       align-items: center;
+                      margin-top: 30px 30px;
                     }
 
           .search{
                   display: flex;
                   justify-content: center;
                   align-items: center;
-                  margin: auto;
+                  margin-top: 30px;
           }
            
 
@@ -126,9 +130,9 @@
       </form>
       <ul id="todo-list"></ul>
         </div>
-        <textarea id="myMemo"></textarea><br>
+        
         <div id="container">
-         
+          <textarea id="myMemo"></textarea><br>
           <input id="memoTitle" type="text" placeholder="메모 제목"><br>
           <select id="memoList" onchange="loadMemo()"></select><br> 
         </div>
