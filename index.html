@@ -79,17 +79,19 @@
                 
             }
 
+
+            #buttonContainer {
+                              display: flex;
+                              justify-content: space-between;
+            }
+
+
             button {
                   display: inline-block;
                   margin-right: 10px;  // 버튼 사이에 오른쪽 여백을 추가합니다.
             }
 
-            #memo{
-                    display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
+           
 
             .search{
                 display: flex;
@@ -117,7 +119,7 @@
       </form>
       <ul id="todo-list"></ul>
         </div>
-        <div id="memo">
+        <div id="buttonContainer">
          <textarea id="myMemo"></textarea>
           <input id="memoTitle" type="text" placeholder="메모 제목"><button id="saveBtn">저장하기</button>
           <button id="newMemoBtn">새 메모 작성</button>
