@@ -79,13 +79,6 @@
                 
             }
 
-            #myMemo{
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  margin-top: 30px;
-            }
-
 
             #container {
                   display: flex;
@@ -93,12 +86,16 @@
                   align-items: center;
                         }    
              #myMemo{
+                 width: 500px;
+                 height: 500px;
                  margin: auto;
                  margin-top: 30px;
+                 display: flex;
+                 justify-content: center;
+                 align-items: center;
              }
             #btns {
                       display: flex;
-                      justify-content: space-between;
                       align-items: center;
                       margin-top: 30px 30px;
                     }
@@ -130,9 +127,9 @@
       </form>
       <ul id="todo-list"></ul>
         </div>
-        
+        <textarea id="myMemo"></textarea><br>
         <div id="container">
-          <textarea id="myMemo"></textarea><br>
+          
           <input id="memoTitle" type="text" placeholder="메모 제목"><br>
           <select id="memoList" onchange="loadMemo()"></select><br> 
         </div>
