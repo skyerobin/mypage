@@ -108,6 +108,12 @@
                   margin-top: 30px;
           }
            
+            #memobtn {
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      margin-top: 30px 30px;
+                    }
 
 
         </style>
@@ -128,7 +134,7 @@
       </form>
       <ul id="todo-list"></ul>
         </div>
-        <button onclick="toggleVisibility()">버튼</button><br>
+        
         <div id="memo" style="display: none;"><br>
             <textarea id="myMemo"></textarea><br>
             <div id="container">
@@ -153,7 +159,18 @@
              </select>
           <input class="keyword" type="text" name="search" size="9" maxlength="225" value="" autocomplete="off" target="_blank" id="sear" placeholder="🔎">
          </form>
-         <iframe 
+        <button id="memobtn" onclick="toggleVisibility()">버튼</button><br>
+         <script>
+        function toggleVisibility() {
+          const memo = document.getElementById("memo");
+          if (memo.style.display === "none") {
+            memo.style.display = "block";
+          } else {
+            memo.style.display = "none";
+          }
+        }
+
+    </script> 
         
       <script src="app.js"></script>
       <script src="clock.js"></script>
@@ -175,15 +192,5 @@
        
         
     </body>
-    <script>
-        function toggleVisibility() {
-          const memo = document.getElementById("memo");
-          if (memo.style.display === "none") {
-            memo.style.display = "block";
-          } else {
-            memo.style.display = "none";
-          }
-        }
-
-    </script>
+    
 </html>
