@@ -128,18 +128,21 @@
       </form>
       <ul id="todo-list"></ul>
         </div>
-        <textarea id="myMemo"></textarea><br>
-        <div id="container">
-          
-          <input id="memoTitle" type="text" size="9" placeholder="메모 제목"><br>
-          <select id="memoList" onchange="loadMemo()"></select><br> 
-        </div>
-        <div id="btns">
-          <button id="saveBtn">저장하기</button>
-          <button id="newMemoBtn">새 메모 작성</button>
-          <button id="editBtn">수정하기</button> 
-          <button id="deleteBtn">삭제하기</button> 
-        </div> 
+        <button onclick="toggleVisibility()">버튼</button><br>
+        <div id="memo" style="display: none;"><br>
+            <textarea id="myMemo"></textarea><br>
+            <div id="container">
+              
+              <input id="memoTitle" type="text" size="9" placeholder="메모 제목"><br>
+              <select id="memoList" onchange="loadMemo()"></select><br> 
+            </div>
+            <div id="btns">
+              <button id="saveBtn">저장하기</button>
+              <button id="newMemoBtn">새 메모 작성</button>
+              <button id="editBtn">수정하기</button> 
+              <button id="deleteBtn">삭제하기</button> 
+            </div>
+        </div>     
        <form class="search" id="search"> 
             <select class="SelectSearch" name="WhichSearch"> 
               <option id="google" value="google">Google</option> 
@@ -164,7 +167,7 @@
             <p class="sub"></p>
             <a target="_blank" href="https://youtube.com/playlist?list=PLIY3iPyOhcg7luG3Vuvf_9qM0gZHg47vd&si=7NdIAnhGdfS1_MW1">🎤</a>
             <!--<a target="_blank" href="https://twitter.com/1fcecb">트위터</a>-->
-            <iframe id="selectedArea" src="https://skyerobin.github.io/momentum/" width="100%" height="1000px" allowfullscreen></iframe>
+         
      
             
         </div>
@@ -172,4 +175,15 @@
        
         
     </body>
+    <script>
+        function toggleVisibility() {
+          const memo = document.getElementById("memo");
+          if (memo.style.display === "none") {
+            memo.style.display = "block";
+          } else {
+            memo.style.display = "none";
+          }
+        }
+
+    </script>
 </html>
