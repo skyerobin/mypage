@@ -154,6 +154,23 @@
               <button id="deleteBtn">삭제하기</button> 
             </div>
         </div><br>
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+              <div class="calendar">
+                <button onclick="prevMonth()">이전 달</button>
+                <span class="month"></span>
+                <button onclick="nextMonth()">다음 달</button>
+                <div class="weekdays">
+                  <div>월</div>
+                  <div>화</div>
+                  <div>수</div>
+                  <div>목</div>
+                  <div>금</div>
+                  <div>토</div>
+                  <div>일</div>
+                </div>
+                <div class="days"></div>
+              </div>
+        </div>          
 
         <iframe id="calendar" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: auto;"  src="https://skyerobin.github.io/momentum/"></iframe><br>
        
