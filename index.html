@@ -152,8 +152,8 @@
               <button id="deleteBtn">삭제하기</button> 
             </div>
         </div>
-        <div id="calendar1" class="calenar2" style="display:none">
-            <iframe src="https://skyerobin.github.io/momentum/"></iframe>
+        <div class="calendar1" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <iframe id="calendar" src="https://skyerobin.github.io/momentum/"></iframe>
         </div>
         
        <form class="search" id="search"> 
@@ -178,7 +178,7 @@
           }
         }
         function toggleVisibility2() {
-          const calendar = document.getElementById("calendar1");
+          const calendar = document.getElementById("calendar");
           if (calendar.style.display === "none") {
             calendar.style.display = "block";
           } else {
