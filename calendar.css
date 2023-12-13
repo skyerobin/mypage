@@ -1,0 +1,51 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* viewport height를 사용하여 화면 전체 높이를 사용하도록 설정 */
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0; /* 배경색을 조금 더 밝게 변경 */
+}
+
+.calendar {
+  width: 600px; /* 기존 300px에서 600px로 변경 */
+  text-align: center;
+}
+
+.month {
+  font-size: 2em; /* 폰트 사이즈를 더 크게 변경 */
+  font-weight: bold;
+  margin-bottom: 20px; /* 하단 여백을 더 크게 변경 */
+}
+
+.weekdays {
+  display: flex;
+  justify-content: space-between;
+}
+
+.weekdays div {
+  width: 80px; /* 기존 40px에서 80px로 변경 */
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.days div {
+  width: 80px; 
+  height: 80px; 
+  border: 1px solid gray;
+  position: relative;
+  padding: 10px; /* 패딩 추가 */
+  box-sizing: border-box; /* 박스 크기 계산 방식 변경 */
+  overflow: auto; /* 내용이 넘칠 경우 스크롤바 표시 */
+  font-size: 0.7em; /* 여기에 추가 */
+}
+
+.days div span {
+  position: absolute;
+  top: 10px; /* 기존 5px에서 10px로 변경 */
+  right: 10px; /* 기존 5px에서 10px로 변경 */
+}
