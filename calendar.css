@@ -1,8 +1,13 @@
-div {
+#calendar {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+.calendar {
+      width: 300px;
+      text-align: center;
+    }
 
  .month {
       font-weight: bold;
