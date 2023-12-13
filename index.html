@@ -112,6 +112,7 @@
 
 
         </style>
+        <link rel="stylesheet" href="calendar.css">
     </head>
     <body>
         <div class="wrap">
@@ -143,7 +144,24 @@
               <button id="editBtn">수정하기</button> 
               <button id="deleteBtn">삭제하기</button> 
             </div>
-        </div>     
+        </div> 
+        <div id="calendar" style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+          <div class="calendar">
+            <button onclick="prevMonth()">이전 달</button>
+            <span class="month"></span>
+            <button onclick="nextMonth()">다음 달</button>
+            <div class="weekdays">
+              <div>월</div>
+              <div>화</div>
+              <div>수</div>
+              <div>목</div>
+              <div>금</div>
+              <div>토</div>
+              <div>일</div>
+            </div>
+            <div class="days"></div>
+          </div>
+        </div>    
        <form class="search" id="search"> 
             <select class="SelectSearch" name="WhichSearch"> 
               <option id="google" value="google">Google</option> 
@@ -154,9 +172,10 @@
              </select>
           <input class="keyword" type="text" name="search" size="9" maxlength="225" value="" autocomplete="off" target="_blank" id="sear" placeholder="🔎">
          </form>
-        <button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility()">버튼</button><br>
+        <button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility1()">메모</button>
+        <button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility2()">달력</button><br>
          <script>
-        function toggleVisibility() {
+        function toggleVisibility1() {
           const memo = document.getElementById("memo");
           if (memo.style.display === "none") {
             memo.style.display = "block";
@@ -164,7 +183,15 @@
             memo.style.display = "none";
           }
         }
-
+        function toggleVisibility2() {
+          const calendar = document.getElementById("calendar");
+          if (calendar.style.display === "none") {
+            calendar.style.display = "block";
+          } else {
+            calendar.style.display = "none";
+          }
+        }
+ 
     </script> 
         
       <script src="app.js"></script>
@@ -174,7 +201,7 @@
       <script src="search.js"></script>
       <script src="todo.js"></script>
       <script src="memo2.js"></script>
-         
+      <script src="calendar.js"></script>   
     </div>
             <p class="sub"></p>
             <a target="_blank" href="https://youtube.com/playlist?list=PLIY3iPyOhcg7luG3Vuvf_9qM0gZHg47vd&si=7NdIAnhGdfS1_MW1">🎤</a>
