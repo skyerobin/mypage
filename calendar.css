@@ -2,10 +2,6 @@ div {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* viewport height를 사용하여 화면 전체 높이를 사용하도록 설정 */
-  margin: 0;
-  padding: 0;
- 
 }
 
 .calendar {
@@ -14,9 +10,9 @@ div {
 }
 
 .month {
-  font-size: 2em; /* 폰트 사이즈를 더 크게 변경 */
+  font-size: 0.7em; /* 폰트 사이즈를 더 크게 변경 */
   font-weight: bold;
-  margin-bottom: 20px; /* 하단 여백을 더 크게 변경 */
+  margin-bottom: 10px; /* 하단 여백을 더 크게 변경 */
 }
 
 .weekdays {
@@ -25,7 +21,7 @@ div {
 }
 
 .weekdays div {
-  width: 80px; /* 기존 40px에서 80px로 변경 */
+  width: 50px; /* 기존 40px에서 80px로 변경 */
 }
 
 .days {
@@ -34,8 +30,8 @@ div {
 }
 
 .days div {
-  width: 60px; 
-  height: 60px; 
+  width: 50px; 
+  height: 50px; 
   border: 1px solid gray;
   position: relative;
   padding: 10px; /* 패딩 추가 */
