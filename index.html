@@ -148,7 +148,10 @@
         <iframe id="calendar" width="600px" height="600px" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"  src="https://skyerobin.github.io/momentum/"></iframe><br>
        
         
-       <form class="search" id="search"> 
+      
+        <button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility1()">메모</button>
+        <button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility2()">달력</button><br>
+         <form class="search" id="search"> 
             <select class="SelectSearch" name="WhichSearch"> 
               <option id="google" value="google">Google</option> 
               <option id="naver" value="naver">Naver</option>
@@ -158,8 +161,6 @@
              </select>
           <input class="keyword" type="text" name="search" size="9" maxlength="225" value="" autocomplete="off" target="_blank" id="sear" placeholder="🔎">
          </form>
-        <button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility1()">메모</button>
-        <button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility2()">달력</button><br>
          <script>
         function toggleVisibility1() {
           const memo = document.getElementById("memo");
