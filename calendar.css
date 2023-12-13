@@ -5,11 +5,11 @@ div {
   height: 100vh; /* viewport height를 사용하여 화면 전체 높이를 사용하도록 설정 */
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0; /* 배경색을 조금 더 밝게 변경 */
+ 
 }
 
 .calendar {
-  width: 600px; /* 기존 300px에서 600px로 변경 */
+  width: 300px; /* 기존 300px에서 600px로 변경 */
   text-align: center;
 }
 
@@ -34,8 +34,8 @@ div {
 }
 
 .days div {
-  width: 80px; 
-  height: 80px; 
+  width: 60px; 
+  height: 60px; 
   border: 1px solid gray;
   position: relative;
   padding: 10px; /* 패딩 추가 */
@@ -46,6 +46,6 @@ div {
 
 .days div span {
   position: absolute;
-  top: 10px; /* 기존 5px에서 10px로 변경 */
-  right: 10px; /* 기존 5px에서 10px로 변경 */
+  top: 5px; /* 기존 5px에서 10px로 변경 */
+  right: 5px; /* 기존 5px에서 10px로 변경 */
 }
