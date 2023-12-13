@@ -108,7 +108,14 @@
                   margin-top: 30px;
           }
            
-           
+           .canlendar2{
+               width: 300px; 
+               height: 300px;
+               display:flex;
+               align-items: center; 
+               justify-content: center; 
+               margin: auto;"
+           }
 
 
         </style>
@@ -144,8 +151,11 @@
               <button id="editBtn">수정하기</button> 
               <button id="deleteBtn">삭제하기</button> 
             </div>
-        </div> 
-        <iframe id="calendar" width="300px" height="300px" style="display:none; flex; align-items: center; justify-content: center; margin: auto;" src="https://skyerobin.github.io/momentum/"></iframe>
+        </div>
+        <div id="calendar1" style="display:none">
+            <iframe id="calendar2" src="https://skyerobin.github.io/momentum/"></iframe>
+        </div>
+        
        <form class="search" id="search"> 
             <select class="SelectSearch" name="WhichSearch"> 
               <option id="google" value="google">Google</option> 
@@ -157,7 +167,7 @@
           <input class="keyword" type="text" name="search" size="9" maxlength="225" value="" autocomplete="off" target="_blank" id="sear" placeholder="🔎">
          </form>
         <button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility1()">메모</button>
-        <button onclick="toggleVisibility2()">달력</button><br>
+        <button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility2()">달력</button><br>
          <script>
         function toggleVisibility1() {
           const memo = document.getElementById("memo");
@@ -168,7 +178,7 @@
           }
         }
         function toggleVisibility2() {
-          const calendar = document.getElementById("calendar");
+          const calendar = document.getElementById("calendar1");
           if (calendar.style.display === "none") {
             calendar.style.display = "block";
           } else {
