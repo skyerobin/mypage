@@ -206,6 +206,19 @@
             calendar.style.display = "none";
           }
         }
+
+         // iframe 바깥을 클릭했을 때 iframe을 닫는 이벤트 리스너
+        document.body.addEventListener('click', function(event) {
+          const calendar = document.getElementById("calendar");
+          if (calendar.style.display === "block") {
+            calendar.style.display = "none";
+          }
+        });
+        
+        // iframe 내부에서 발생하는 클릭 이벤트가 body 요소까지 전파되는 것을 방지하는 이벤트 리스너
+        document.getElementById("calendar").addEventListener('click', function(event) {
+          event.stopPropagation();
+        });    
  
     </script> 
         
