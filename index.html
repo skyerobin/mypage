@@ -152,7 +152,10 @@
               <button id="saveBtn">저장하기</button>
               <button id="newMemoBtn">새 메모 작성</button>
               <button id="editBtn">수정하기</button> 
-              <button id="deleteBtn">삭제하기</button> 
+              <button id="deleteBtn">삭제하기</button>
+              <!-- 일정 확인 버튼 -->
+              <button id="viewScheduleBtn" onclick="viewSchedule()">일정 확인</button>
+    
             </div>
         </div><br>
        <!-- <div id="calendar" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: auto;"height: 100vh; margin: 0;">
@@ -198,14 +201,15 @@
             memo.style.display = "none";
           }
         }
-        function toggleVisibility2() {
-          const memo = document.getElementById("calendar");
-          if (calendar.style.display === "none") {
-            calendar.style.display = "block";
-          } else {
-            calendar.style.display = "none";
-          }
-        }
+        const viewSchedule = () => {
+        // 일정 내용 가져오기
+        const schedule = document.getElementById('myMemo').value;
+        
+        // iframe으로 일정 표시
+        const scheduleFrame = document.getElementById('calendar');
+        scheduleFrame.srcdoc = schedule;
+        scheduleFrame.style.display = 'block';
+      };
     </script> 
         
       <script src="app.js"></script>
@@ -215,9 +219,9 @@
       <script src="search.js"></script>
       <script src="todo.js"></script>
       <script src="memo2.js"></script>
-      <script src="date.js"></script>
+     
     </div>
-         <button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility2()">메모</button>
+         <!--<button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility2()">메모</button>-->
      
             <p class="sub"></p>
             <!--<a target="_blank" href="https://youtube.com/playlist?list=PLIY3iPyOhcg7luG3Vuvf_9qM0gZHg47vd&si=7NdIAnhGdfS1_MW1">🎤</a>-->
