@@ -153,11 +153,9 @@
               <button id="newMemoBtn">새 메모 작성</button>
               <button id="editBtn">수정하기</button> 
               <button id="deleteBtn">삭제하기</button>
-              <button id="showCheckboxValueBtn">체크박스 값 보기</button> <!-- 추가된 버튼 -->
+              
             </div>
-            <div id="checkboxContainer">
-                <input type="checkbox" id="myCheckbox" value="체크박스 값"> 체크박스 <!-- 추가된 체크박스 -->
-            </div>
+         
         </div><br>
   
        <iframe id="scheduleFrame" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: scroll;"></iframe><br>
@@ -187,17 +185,7 @@
           }
         }
 
-    document.getElementById('showCheckboxValueBtn').addEventListener('click', function() {
-    const checkbox = document.getElementById('myCheckbox'); // const로 변경
-    const textarea = document.getElementById('myMemo'); // const로 변경
 
-    if(checkbox.checked) { // 체크박스가 체크된 경우
-        textarea.value = checkbox.value; // 체크박스의 값을 textarea에 표시
-    } else { // 체크박스가 체크되지 않은 경우
-        textarea.value = ''; // textarea를 비움
-    }
-});
-     
        
     </script> 
         
