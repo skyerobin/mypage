@@ -61,3 +61,13 @@ window.onload = function() {
     memoList.add(option);
   }
 };
+// 메모 목록에서 항목을 선택하면 해당 메모의 내용을 표시합니다.
+document.getElementById('memoList').addEventListener('change', function() {
+  const memoTitle = this.value;
+  let memos = JSON.parse(localStorage.getItem('memos')) || {};
+  
+  if(memos[memoTitle]) {
+    document.getElementById('myMemo').value = memos[memoTitle];
+    document.getElementById('memoTitle').value = memoTitle;
+  }
+});
