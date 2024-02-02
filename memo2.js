@@ -22,3 +22,42 @@ document.getElementById('saveBtn').addEventListener('click', function() {
     memoList.add(option);
   }
 });
+
+document.getElementById('deleteBtn').addEventListener('click', function() {
+  const memoTitle = document.getElementById('memoTitle').value;
+  let memos = JSON.parse(localStorage.getItem('memos')) || {};
+  if(memos[memoTitle]) {
+    delete memos[memoTitle];
+    localStorage.setItem('memos', JSON.stringify(memos));
+
+    const memoList = document.getElementById('memoList');
+    for (let i = 0; i < memoList.options.length; i++) {
+      if (memoList.options[i].value == memoTitle) {
+        memoList.remove(i);
+        break;
+      }
+    }
+    document.getElementById('myMemo').value = '';
+    document.getElementById('memoTitle').value = '';
+  } else {
+    alert('삭제할 메모를 선택해주세요.');
+  }
+});
+document.getElementById('newMemoBtn').addEventListener('click', function() {
+  document.getElementById('memoTitle').value = '';
+  document.getElementById('myMemo').value = '';
+  document.getElementById('memoList').selectedIndex = -1; // 메모 목록에서 선택을 해제합니다.
+});
+
+// 페이지 로딩 시 저장된 메모를 불러와서 목록에 표시합니다.
+window.onload = function() {
+  let memos = JSON.parse(localStorage.getItem('memos')) || {};
+  const memoList = document.getElementById('memoList');
+  
+  for(let memoTitle in memos) {
+    let option = document.createElement('option');
+    option.text = memoTitle;
+    option.value = memoTitle;
+    memoList.add(option);
+  }
+};
