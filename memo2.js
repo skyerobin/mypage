@@ -71,3 +71,26 @@ document.getElementById('memoList').addEventListener('change', function() {
     document.getElementById('memoTitle').value = memoTitle;
   }
 });
+
+// 페이지 로딩 시 저장된 메모를 불러와서 목록에 표시합니다.
+window.onload = function() {
+  let memos = JSON.parse(localStorage.getItem('memos')) || {};
+  const memoList = document.getElementById('memoList');
+  
+  for(let memoTitle in memos) {
+    let option = document.createElement('option');
+    option.text = memoTitle;
+    option.value = memoTitle;
+    memoList.add(option);
+  }
+
+  // 메모 목록에서 항목을 선택하면 해당 메모의 내용을 표시합니다.
+  memoList.addEventListener('change', function() {
+    const selectedMemoTitle = this.value;
+    if(memos[selectedMemoTitle]) {
+      document.getElementById('myMemo').value = memos[selectedMemoTitle];
+      document.getElementById('memoTitle').value = selectedMemoTitle;
+    }
+  });
+};
+
