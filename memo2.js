@@ -6,21 +6,26 @@ document.getElementById('saveBtn').addEventListener('click', function() {
 
   // 제목이 같은 메모가 이미 있는지 확인합니다.
   if(memos[memoTitle]) {
-    // 제목이 같은 메모가 이미 있다면, 그 메모를 업데이트합니다.
-    memos[memoTitle] = myMemo;
-    localStorage.setItem('memos', JSON.stringify(memos));
-    document.getElementById('myMemo').value = '';
+    // 제목이 같은 메모가 이미 있다면, 그 메모에 새로운 내용을 추가합니다.
+    // 여기서 "\n"은 새로운 줄을 의미합니다. 필요에 따라 다른 구분자를 사용할 수 있습니다.
+    memos[memoTitle] += "\n" + myMemo;
   } else {
     // 제목이 같은 메모가 없다면, 새로운 메모를 추가합니다.
     memos[memoTitle] = myMemo;
-    localStorage.setItem('memos', JSON.stringify(memos));
+  }
+  localStorage.setItem('memos', JSON.stringify(memos));
 
+  // 새로운 메모를 추가하는 경우에만 목록에 추가합니다.
+  if(!document.getElementById('memoList').querySelector(`[value="${memoTitle}"]`)) {
     const memoList = document.getElementById('memoList');
     let option = document.createElement('option');
     option.text = memoTitle;
     option.value = memoTitle;
     memoList.add(option);
   }
+
+  // 메모 필드를 초기화합니다.
+  document.getElementById('myMemo').value = '';
 });
 
 document.getElementById('deleteBtn').addEventListener('click', function() {
