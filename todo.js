@@ -19,11 +19,21 @@ function deleteToDo(event) {
 function paintToDo(newTodo) {
   const li = document.createElement("li");
   li.id = newTodo.id;
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.addEventListener("change", () => {
+    span.classList.toggle("strikethrough"); // Toggle strikethrough class
+  });
+
   const span = document.createElement("span");
   span.innerText = newTodo.text;
+
   const button = document.createElement("button");
   button.innerText = "❌";
   button.addEventListener("click", deleteToDo);
+
+  li.appendChild(checkbox);
   li.appendChild(span);
   li.appendChild(button);
   toDoList.appendChild(li);
