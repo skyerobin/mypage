@@ -140,23 +140,6 @@ ul li {
         <input type="text" placeholder="Write a To Do and Press Enter" required />
       </form>
       <ul id="todo-list"></ul>
-        </div>
-        
-        <div id="memo" style="display: none;"><br>
-            <textarea id="myMemo"></textarea><br>
-            <div id="container">
-              
-              <input id="memoTitle" type="text" size="9" placeholder="메모 제목"><br>
-              <select id="memoList" onchange="loadMemo()"></select><br> 
-            </div>
-            <div id="btns">
-              <button id="saveBtn">저장하기</button>
-              <button id="newMemoBtn">새 메모 작성</button>
-              <button id="editBtn">수정하기</button> 
-              <button id="deleteBtn">삭제하기</button>
-              
-            </div>
-         
         </div><br>
   
        <iframe id="scheduleFrame" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: scroll;"></iframe><br>
@@ -176,19 +159,7 @@ ul li {
              </select>
           <input class="keyword" type="text" name="search" size="9" maxlength="225" value="" autocomplete="off" target="_blank" id="sear" placeholder="🔎">
          </form>
-         <script>
-        function toggleVisibility1() {
-          const memo = document.getElementById("memo");
-          if (memo.style.display === "none") {
-            memo.style.display = "block";
-          } else {
-            memo.style.display = "none";
-          }
-        }
-
-
-       
-    </script> 
+         
         
       <script src="app.js"></script>
       <script src="clock.js"></script>
