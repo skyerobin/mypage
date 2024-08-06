@@ -144,11 +144,20 @@ ul li {
   
        <iframe id="scheduleFrame" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: scroll;"></iframe><br>
    
+        <select class="selct" name="none" onchange="window.open(value,'_blank');" id="s2">
+      <option value="none">------  ------</option>
+      <optgroup label="ch">
+        <option value="https://music.youtube.com/playlist?list=PLIY3iPyOhcg6BX7ty7AyRUSYYV6GWEqOI&si=7A2TjIkJKEmzhXff">n.</option>
+        <option value="https://music.youtube.com/playlist?list=PLIY3iPyOhcg6FAQq0hvXphATzSUOvCb2d&si=smh9nhlclzk2a79V">O.</option>
+        <option value="https://music.youtube.com/playlist?list=PLIY3iPyOhcg69Rg6vVh9FhNlfKJ2e4tb4&si=VbXfNE_4ZAWeh557">R.</option>
+        <option value="">...</option>
+        <option value="https://youtube.com/playlist?list=PLQQijRSMASmuyWqrlARPUXJGAS0pKNQMv&si=8QmKJqWLpsbhYL6s
+">1</option>
         
+      </optgroup>
+      </select>
       
-        <button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility1()">메모</button>
-           
-     
+        
          <form class="search" id="search"> 
             <select class="SelectSearch" name="WhichSearch"> 
               <option id="google" value="google">Google</option> 
@@ -170,7 +179,7 @@ ul li {
       <script src="memo2.js"></script>
      
     </div>
-         <!--<button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility2()">메모</button>-->
+         <!--<button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility2()">...</button>-->
      
             <p class="sub"></p>
             <!--<a target="_blank" href="https://youtube.com/playlist?list=PLIY3iPyOhcg7luG3Vuvf_9qM0gZHg47vd&si=7NdIAnhGdfS1_MW1">🎤</a>-->
