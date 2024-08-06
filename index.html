@@ -122,14 +122,7 @@ ul li {
   list-style-type: none;
 }
 
- #s2{
-  width: 300px;
-  margin: 30px auto 0px auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+ 
         </style>
         <link rel="stylesheet" href="calendar.css">
     </head>
@@ -164,7 +157,19 @@ ul li {
         
       </optgroup>
       </select>
-      
+       <button style="display: flex; align-items: center; justify-content: center; margin: auto;" onclick="toggleVisibility1()">🎤</button>
+       
+
+    <script>
+    function toggleVisibility1() {
+    const memo = document.getElementById("memo");
+    if (memo.style.display === "none") {
+    memo.style.display = "block";
+    } else {
+    memo.style.display = "none";
+    }
+    }
+    </script>
         
          <form class="search" id="search"> 
             <select class="SelectSearch" name="WhichSearch"> 
