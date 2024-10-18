@@ -10,14 +10,14 @@ const quotes = [
         songUrl: "https://music.youtube.com/watch?v=eEpbE2UJXcU&si=IChvWUbPk3zierSw", // 노래 URL 추가
     },
     {
-        quote: "My memories are reminding me.",
-        author: "Summer Paradis",     
-        songUrl: "https://music.youtube.com/watch?v=hAz6lnQzfe4&si=bGHzAgR7T3sqBQe6", // 노래 URL 추가
+        quote: "I'm just getting off my face tonight",
+        author: "12:45",     
+        songUrl: "https://music.youtube.com/watch?v=fSzLmXV9pIo&si=UZfUxOoWV90lwmXK", // 노래 URL 추가
     },
     {
-        quote: "I would have kept you, forever, what we had to sever.",
-        author: "Attck",     
-        songUrl: "https://music.youtube.com/watch?v=FnL0pbR7reI&si=EOe_LIZRAL9Av2U8", // 노래 URL 추가
+        quote: "When you're up at 2AM you know that I'll be up in 5.",
+        author: "tomrrow tonight",     
+        songUrl: "https://music.youtube.com/watch?v=R4wbjdrbDa4&si=U4U3Out0KV7dy2Kw", // 노래 URL 추가
     },
     {
         quote: "Will you take it? Your eyes bring color to my life.",
