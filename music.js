@@ -15,46 +15,46 @@ const quotes = [
         songUrl: "https://music.youtube.com/watch?v=hAz6lnQzfe4&si=bGHzAgR7T3sqBQe6", // 노래 URL 추가
     },
     {
-        quote: "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-        author: "Winston Churchill",     
-        songUrl: "https://music.youtube.com/watch?v=song4", // 노래 URL 추가
+        quote: "I would have kept you, forever, what we had to sever.",
+        author: "Attck",     
+        songUrl: "https://music.youtube.com/watch?v=FnL0pbR7reI&si=EOe_LIZRAL9Av2U8", // 노래 URL 추가
     },
     {
-        quote: "Be yourself; everyone else is already taken.",
-        author: "Oscar Wilde",     
-        songUrl: "https://music.youtube.com/watch?v=song5", // 노래 URL 추가
+        quote: "Will you take it? Your eyes bring color to my life.",
+        author: "The Love We've Made",     
+        songUrl: "https://music.youtube.com/watch?v=KQlNQGLJ04I&si=aZZ0hX-RqyaQgawh", // 노래 URL 추가
     },
     {
-        quote: "Life is what happens when you're busy making other plans.",
-        author: "John Lennon",     
-        songUrl: "https://music.youtube.com/watch?v=song6", // 노래 URL 추가
+        quote: "You are my address.",
+        author: "One Way Ticict",     
+        songUrl: "https://music.youtube.com/watch?v=T4RxZyCg6K4&si=FK0SIqWG34C3qC7S", // 노래 URL 추가
     },
     {
-        quote: "The only limit to our realization of tomorrow is our doubts of today.",
-        author: "Franklin D. Roosevelt",     
-        songUrl: "https://music.youtube.com/watch?v=song7", // 노래 URL 추가
+        quote: "One, two, three, your smile is the best thing in the world.",
+        author: "Hey Song",     
+        songUrl: "https://music.youtube.com/watch?v=T2nmBV59iJ8&si=ZPxb3l4P9K86Bh7D", // 노래 URL 추가
     },
     {
-        quote: "It always seems impossible until it's done.",
-        author: "Nelson Mandela",     
-        songUrl: "https://music.youtube.com/watch?v=song8", // 노래 URL 추가
+        quote: "Let's live like we're immortal.",
+        author: "Wasted Night",     
+        songUrl: "https://music.youtube.com/watch?v=g3kChT7B3Us&si=k4B-X2UrciwSBNB6", // 노래 URL 추가
     },
     {
-        quote: "Happiness is not something ready made. It comes from your own actions.",
-        author: "Dalai Lama",     
-        songUrl: "https://music.youtube.com/watch?v=song9", // 노래 URL 추가
+        quote: "Feel like, feel like Feel like leaving it to the flow.",
+        author: "おもかげ",     
+        songUrl: "https://music.youtube.com/watch?v=jg-uSq64Ru8&si=cmN1UmfG-E7w_uO9", // 노래 URL 추가
     },
     {
-        quote: "What you get by achieving your goals is not as important as what you become by achieving your goals.",
-        author: "Zig Ziglar",     
-        songUrl: "https://music.youtube.com/watch?v=song10", // 노래 URL 추가
+        quote: "最前線に 最前線に 最前線にいこう.",
+        author: "フロントライン",     
+        songUrl: "https://music.youtube.com/watch?v=j4QHBAIWxa8&si=F6u4X-ZubTeEbMAo", // 노래 URL 추가
     },
 ];
 
 const quoteElement = document.querySelector("#quote span:first-child");
 const authorElement = document.querySelector("#quote span:last-child");
 
-// 랜덤으로 오늘의 quote 선택
+// 랜덤으로오늘의 quote 선택
 const todaysQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
 quoteElement.innerText = todaysQuote.quote;
