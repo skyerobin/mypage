@@ -48,6 +48,10 @@ const quotes = [
         quote: "最前線に 最前線に 最前線にいこう.",
         author: "フロントライン",     
         songUrl: "https://music.youtube.com/watch?v=j4QHBAIWxa8&si=F6u4X-ZubTeEbMAo", // 노래 URL 추가
+    },{
+        quote: "It's the freedom of a thousand doves",
+        author: "Paint My Love",     
+        songUrl: "https://music.youtube.com/watch?v=j4QHBAIWxa8&si=F6u4X-ZubTeEbMAo", // 노래 URL 추가  
     },
 ];
 
