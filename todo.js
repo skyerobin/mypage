@@ -17,12 +17,7 @@ function deleteTodo(event){
     toDos = toDos.filter((toDo) => toDo.id !== parseInt  (li.id)); 
     saveToDos();
 }
-function completeTodo(event){
-    const li = event.target.parentElement;
-    li.classList.toggle("completed");
-    const updatedToDo.completed = !updatedToDo.completed;
-    saveToDos();
-}
+
     
 function paintToDo(newTodo){
     const li = document.createElement("li");
@@ -32,9 +27,6 @@ function paintToDo(newTodo){
     const button = document.createElement("button");
     button.innerText = "❌";
     button.addEventListener("click",deleteTodo);
-    const complete = document.createElement("button");
-    complete.innerText = "✔️";
-    button.addEventListener("click",completeTodo);
     li.appendChild(span);
     li.appendChild(button);
     li.appendChild(complete);
