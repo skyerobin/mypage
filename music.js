@@ -51,7 +51,7 @@ const quotes = [
     },{
         quote: "It's the freedom of a thousand doves",
         author: "Paint My Love",     
-        songUrl: "https://music.youtube.com/watch?v=j4QHBAIWxa8&si=F6u4X-ZubTeEbMAo", // 노래 URL 추가  
+        songUrl: "https://music.youtube.com/watch?v=DY5-PJf6OrA&si=nn4Khj9us03mN0Na", // 노래 URL 추가  
     },
 ];
 
