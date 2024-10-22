@@ -17,17 +17,30 @@ function deleteTodo(event){
     toDos = toDos.filter((toDo) => toDo.id !== parseInt  (li.id)); 
     saveToDos();
 }
-
+function completeTodo(event){
+    const li = event.target.parentElement;
+    li.classList.toggle("completed");
+    const updatedToDo.completed = !updatedToDo.completed;
+    saveToDos();
+}
+    
 function paintToDo(newTodo){
     const li = document.createElement("li");
     li.id = newTodo.id;
     const span = document.createElement("span");
     span.innerText = newTodo.text; 
     const button = document.createElement("button");
-    button.innerText = "❌"
+    button.innerText = "❌";
     button.addEventListener("click",deleteTodo);
+    const complete = document.createElement("button");
+    complete.innerText = "✔️";
+    button.addEventListener("click",completeTodo);
     li.appendChild(span);
     li.appendChild(button);
+    li.appendChild(complete);
+    if (newTodo.completed) {
+        li.classList.add("completed");
+    }
     toDoList.appendChild(li);
 }
 
@@ -45,9 +58,6 @@ function handleToDoSubmit(event){
 
 }
 
-function sayHello(){
-
-}
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
 
