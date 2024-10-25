@@ -12,10 +12,10 @@ Search.prototype.Engine = function() {
         } else if(engine === 'youtube'){
             location.href = 'https://www.youtube.com/results?search_query=' + keyword;
         } else if(engine === 'x'){
-            location.href = 'https://twitter.com/search?q=' + keyword;
+            location.href = 'https://twitter.com/search?q' + keyword;
         } else if(engine === ''){
             location.href = '';
-        } else { // engine 값이 어떤 조건에도 맞지 않는 경우
+        } else(engine === 'music') { // engine 값이 어떤 조건에도 맞지 않는 경우
             location.href = 'https://music.youtube.com/search?q=' + keyword;
         }
     });
