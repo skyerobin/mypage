@@ -28,7 +28,7 @@ const Searching = Search.prototype;
           }else if(engine ==='x'){
             location.href = 'https://twitter.com/search?q=' + keyword;
           } else{
-            location.href = 'https://music.youtube.com/search?q=.'
+            location.href = 'https://music.youtube.com/search?q=' + keyword;
       });
   }
   
