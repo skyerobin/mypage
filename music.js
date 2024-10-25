@@ -62,7 +62,7 @@ const authorElement = document.querySelector("#quote span:last-child");
 const todaysQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
 quoteElement.innerText = todaysQuote.quote;
-authorElement.innerText = todaysQuote.author;
+//authorElement.innerText = todaysQuote.author;
 
 // 클릭 이벤트 리스너 추가
 quoteElement.addEventListener("click", () => {
