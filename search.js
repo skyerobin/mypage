@@ -16,4 +16,4 @@ Search.prototype.Engine = function() {
         }
     });
 }
-new Search()
+
