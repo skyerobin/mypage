@@ -70,15 +70,25 @@
         background-color: #f2f2f2;
       }
 
-      #quote {
-        width: 300px;
-        margin: 30px auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
+    #quoteContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 300px;
+    height: 200px;
+    margin: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+.quote {
+    width: 100%;
+    text-align: center;
+}
       .search {
         display: flex;
         justify-content: center;
@@ -120,7 +130,7 @@
     <ul id="todo-list"></ul>
 
 
-      <div id="quote">
+      <div id="quoteContainer">
         <span></span>
        <span></span>
       </div>
