@@ -55,17 +55,43 @@ const quotes = [
     },
 ];
 
-const quoteElement = document.querySelector("#quote span:first-child");
-const authorElement = document.querySelector("#quote span:last-child");
+const defaultSongUrl = "https://music.youtube.com/watch?v=defaultSong";
+const quoteContainer = document.getElementById("quoteContainer");
+let currentIndex = Math.floor(Math.random() * quotes.length);
 
-// 랜덤으로오늘의 quote 선택
-const todaysQuote = quotes[Math.floor(Math.random() * quotes.length)];
+// Function to display the current quote
+function displayQuote(index) {
+    quoteContainer.innerHTML = `
+        <div class="quote" onclick="playMusic(${index})">
+            <p>${quotes[index].quote}</p>
+        
+        </div>
+    `;
+}
 
-quoteElement.innerText = todaysQuote.quote;
-//authorElement.innerText = todaysQuote.author;
+// Function to play music for the current quote
+function playMusic(index) {
+    const songUrl = quotes[index].songUrl || defaultSongUrl;
+    window.open(songUrl, "_blank");
+}
 
-// 클릭 이벤트 리스너 추가
-quoteElement.addEventListener("click", () => {
-    // 해당 quote의 곡 URL로 이동
-    window.open(todaysQuote.songUrl, "_blank");
+// Swipe functionality
+let startX;
+quoteContainer.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
 });
+
+quoteContainer.addEventListener("touchend", (e) => {
+    const endX = e.changedTouches[0].clientX;
+    if (endX < startX - 50) {
+        // Swipe left for the next quote
+        currentIndex = (currentIndex + 1) % quotes.length;
+    } else if (endX > startX + 50) {
+        // Swipe right for the previous quote
+        currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
+    }
+    displayQuote(currentIndex);
+});
+
+// Display initial random quote
+displayQuote(currentIndex);
