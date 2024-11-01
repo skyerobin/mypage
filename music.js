@@ -49,9 +49,9 @@ const quotes = [
         author: "フロントライン",     
         songUrl: "https://music.youtube.com/watch?v=j4QHBAIWxa8&si=F6u4X-ZubTeEbMAo", // 노래 URL 추가
     },{
-        quote: "It's the freedom of a thousand doves",
-        author: "Paint My Love",     
-        songUrl: "https://music.youtube.com/watch?v=DY5-PJf6OrA&si=nn4Khj9us03mN0Na", // 노래 URL 추가  
+        quote: "But there never seems to be enough timeTo do the things you want to do once you find them",
+        author: "Time in a Bottle",     
+        songUrl: "https://music.youtube.com/watch?v=gnrSpwb2Ax4&si=KBbGx_SsWDKohAEt", // 노래 URL 추가  
     },
 ];
 
