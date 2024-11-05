@@ -10,9 +10,9 @@ const quotes = [
         songUrl: "https://music.youtube.com/watch?v=eEpbE2UJXcU&si=IChvWUbPk3zierSw", // 노래 URL 추가
     },
     {
-        quote: "I'm just getting off my face tonight",
-        author: "12:45",     
-        songUrl: "https://music.youtube.com/watch?v=fSzLmXV9pIo&si=UZfUxOoWV90lwmXK", // 노래 URL 추가
+        quote: "'Cause if you jump I will jump too",
+        author: "Skyway Avenue",     
+        songUrl: "https://music.youtube.com/watch?v=SRGa5kNQqMI&si=ILdyvUVxNQKOwq31", // 노래 URL 추가
     },
     {
         quote: "When you're up at 2AM you know that I'll be up in 5.",
@@ -20,9 +20,9 @@ const quotes = [
         songUrl: "https://music.youtube.com/watch?v=R4wbjdrbDa4&si=U4U3Out0KV7dy2Kw", // 노래 URL 추가
     },
     {
-        quote: "Will you take it? Your eyes bring color to my life.",
-        author: "The Love We've Made",     
-        songUrl: "https://music.youtube.com/watch?v=KQlNQGLJ04I&si=aZZ0hX-RqyaQgawh", // 노래 URL 추가
+        quote: "Here's to the ones that we got.",
+        author: "Memories",     
+        songUrl: "https://music.youtube.com/watch?v=lNilb-EaTOU&si=I5VLn2x4M_kQkN2Q", // 노래 URL 추가
     },
     {
         quote: "You are my address.",
@@ -52,6 +52,12 @@ const quotes = [
         quote: "But there never seems to be enough timeTo do the things you want to do once you find them",
         author: "Time in a Bottle",     
         songUrl: "https://music.youtube.com/watch?v=gnrSpwb2Ax4&si=KBbGx_SsWDKohAEt", // 노래 URL 추가  
+    },
+    {   
+        quote:"I'm off to a new town to find me a new toyI'm off to a new town to find me a new toy",
+        author:"Strawberry Margarita",
+        songUrl:"https://music.youtube.com/watch?v=uU6TA2T4A5s&si=wACAhpDFmY5vj2Gp",
+        
     },
 ];
 
