@@ -15,13 +15,16 @@
             saveToDos();
         }
 
-        function toggleComplete(event) {
-            const li = event.target.parentElement;
-            li.classList.toggle("completed");
-            const updatedToDo = toDos.find((toDo) => toDo.id === parseInt(li.id));
-            updatedToDo.completed = !updatedToDo.completed;
-            saveToDos();
-        }
+       function toggleComplete(event) {
+           const li = event.target.parentElement;
+           const updatedToDo = toDos.find((toDo) => toDo.id === parseInt(li.id));
+       
+           if (updatedToDo) { // updatedToDo가 존재하는 경우에만
+               li.classList.toggle("completed");
+               updatedToDo.completed = !updatedToDo.completed;
+               saveToDos();
+           }
+       }
 
         function paintToDo(newTodo) {
             const li = document.createElement("li");
