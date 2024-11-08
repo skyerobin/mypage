@@ -27,7 +27,7 @@ const quotes = [
     {
         quote: "You are my address.",
         author: "One Way Ticict",
-        songUrl: "https://music.youtube.com/playlist?list=PLIY3iPyOhcg6FAQq0hvXphATzSUOvCb2d&si=jSIVDBQqEqPZJ9rp",
+        songUrl: "https://music.youtube.com/watch?v=T4RxZyCg6K4&si=xg8g7NzO-yVlPJn8",
     },
     {
         quote: "One, two, three, your smile is the best thing in the world.",
