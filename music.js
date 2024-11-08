@@ -68,7 +68,7 @@ let currentIndex = Math.floor(Math.random() * quotes.length);
 // Function to display the current quote
 function displayQuote(index) {
     // Ensure the index is within bounds
-    if (index < 0 || index >= quotes.length) return;
+   // if (index < 0 || index >= quotes.length) return;
 
     quoteContainer.innerHTML = `
         <div class="quote" onclick="playMusic(${index})">
