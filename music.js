@@ -20,14 +20,14 @@ const quotes = [
         songUrl: "https://music.youtube.com/watch?v=R4wbjdrbDa4&si=U4U3Out0KV7dy2Kw",
     },
     {
-        quote: "Here's to the ones that we got.",
-        author: "Memories",
-        songUrl: "https://music.youtube.com/watch?v=lNilb-EaTOU&si=I5VLn2x4M_kQkN2Q",
+        quote: "And though you're dead and gone, believe me.",
+        author: "Welcome to the Black Parad",
+        songUrl: "https://music.youtube.com/watch?v=v_uncMEJkBc&si=qhX2flxV4f1D5Dta",
     },
     {
         quote: "You are my address.",
         author: "One Way Ticict",
-        songUrl: "https://music.youtube.com/watch?v=T4RxZyCg6K4&si=FK0SIqWG34C3qC7S",
+        songUrl: "https://music.youtube.com/playlist?list=PLIY3iPyOhcg6FAQq0hvXphATzSUOvCb2d&si=jSIVDBQqEqPZJ9rp",
     },
     {
         quote: "One, two, three, your smile is the best thing in the world.",
@@ -37,7 +37,7 @@ const quotes = [
     {
         quote: "Let's live like we're immortal.",
         author: "Wasted Night",
-        songUrl: "https://music.youtube.com/watch?v=g3kChT7B3Us&si=k4B-X2UrciwSBNB6",
+        songUrl: "https://music.youtube.com/watch?v=v=g3kChT7B3Us&si=aQpljDZGKSxjLt_a",
     },
     {
         quote: "Feel like, feel like Feel like leaving it to the flow.",
