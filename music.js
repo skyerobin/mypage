@@ -1,6 +1,6 @@
 const quotes = [
     {
-        quote: "I'm finally breathing.",
+        quote: "'Cause this is where I belong",
         author: "Where I belong",
         songUrl: "https://music.youtube.com/watch?v=Q8GfoU3oRUc&si=NKJ_4rhyJWasAGBl",
     },
@@ -15,9 +15,9 @@ const quotes = [
         songUrl: "https://music.youtube.com/watch?v=SRGa5kNQqMI&si=ILdyvUVxNQKOwq31",
     },
     {
-        quote: "When you're up at 2AM you know that I'll be up in 5.",
-        author: "tomrrow tonight",
-        songUrl: "https://music.youtube.com/watch?v=R4wbjdrbDa4&si=U4U3Out0KV7dy2Kw",
+        quote: "Find euphoria in dystopia.",
+        author: "Dystopia",
+        songUrl: "https://music.youtube.com/watch?v=djkelGOcR-Q&si=CFKsxSgzf3Eye3tn",
     },
     {
         quote: "And though you're dead and gone, believe me.",
@@ -30,9 +30,9 @@ const quotes = [
         songUrl: "https://music.youtube.com/watch?v=T4RxZyCg6K4&si=xg8g7NzO-yVlPJn8",
     },
     {
-        quote: "One, two, three, your smile is the best thing in the world.",
-        author: "Hey Song",
-        songUrl: "https://music.youtube.com/watch?v=T2nmBV59iJ8&si=ZPxb3l4P9K86Bh7D",
+        quote: "I'm not really quite myself.",
+        author: "Not Quite Myself",
+        songUrl: "https://music.youtube.com/watch?v=Jhxs4KLPoOA&si=LlMJvcqxTNZVgSsf",
     },
     {
         quote: "Let's live like we're immortal.",
@@ -50,15 +50,20 @@ const quotes = [
         songUrl: "https://music.youtube.com/watch?v=j4QHBAIWxa8&si=F6u4X-ZubTeEbMAo",
     },
     {
-        quote: "But there never seems to be enough time to do the things you want to do once you find them.",
-        author: "Time in a Bottle",
-        songUrl: "https://music.youtube.com/watch?v=gnrSpwb2Ax4&si=KBbGx_SsWDKohAEt",
+        quote: "One, two, three, your smile is the best thing in the world.",
+        author: "Hey Song",
+        songUrl: "https://music.youtube.com/watch?v=T2nmBV59iJ8&si=ZPxb3l4P9K86Bh7D",
     },
     {
         quote: "I'm off to a new town to find me a new toy.",
         author: "Strawberry Margarita",
         songUrl: "https://music.youtube.com/watch?v=uU6TA2T4A5s&si=wACAhpDFmY5vj2Gp",
     },
+    {
+        quote: "When you're up at 2AM you know that I'll be up in 5.",
+        author: "tomrrow tonight",
+        songUrl: "https://music.youtube.com/watch?v=R4wbjdrbDa4&si=U4U3Out0KV7dy2Kw",
+    }
 ];
 
 const defaultSongUrl = "https://music.youtube.com/watch?v=defaultSong";
