@@ -60,9 +60,9 @@ const quotes = [
         songUrl: "https://music.youtube.com/watch?v=uU6TA2T4A5s&si=wACAhpDFmY5vj2Gp",
     },
     {
-        quote: "When you're up at 2AM you know that I'll be up in 5.",
-        author: "tomrrow tonight",
-        songUrl: "https://music.youtube.com/watch?v=R4wbjdrbDa4&si=U4U3Out0KV7dy2Kw",
+        quote: "いつか辿り着くその時まで.",
+        author: "君に捧げる応援歌",
+        songUrl: "https://music.youtube.com/watch?v=qDdBiFa82ho&si=UBni2k20LmfC9n0q",
     }
 ];
 
