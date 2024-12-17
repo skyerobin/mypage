@@ -70,7 +70,7 @@ const quotes = [
       songUrl: "https://www.youtube.com/watch?v=lopaULFG0Vs&list=PLqWc2O_tK2xmBPuyknXe13eHy0r-tzupI&index=19",   
     },
     {
-      quote: "Back then when I was running out of your place I said, "/I never wanna see your face.",
+      quote: "Back then when I was running out of your place I said, "/I never wanna see your face/" ",
       author: "toxic till the end",
       songUrl: "https://www.youtube.com/watch?v=gu0B7eGU0iw&list=PLIY3iPyOhcg6ELdKPBIFouJH5qqJ3KTKh&index=28",   
     }
