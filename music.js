@@ -73,6 +73,11 @@ const quotes = [
       quote: "Back then when I was running out of your place I said, 'I never wanna see your face' ",
       author: "toxic till the end",
       songUrl: "https://www.youtube.com/watch?v=gu0B7eGU0iw&list=PLIY3iPyOhcg6ELdKPBIFouJH5qqJ3KTKh&index=28",   
+    },
+    {
+      quote: "幸せになりたい 気持ちがあるなら 明日を見つけることは とても簡単",
+      author: "Genki Wo Dashite",
+      songUrl: "https://www.youtube.com/watch?v=Vw4YwTAkDNQ&list=PLIY3iPyOhcg7xBRM_QM0Cp1jQsIMB6JQb",     
     }
     
 ];
