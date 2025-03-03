@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    select {
+      margin-top: 10px;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #root {
+      text-align: center;
+    }
+
+    input, button {
+      margin: 10px;
+      padding: 5px;
+      font-size: 16px;
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 5px;
+      font-size: 18px;
+    }
+
+    li.completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #ff1a1a;
+    }
+  </style>
+  <title>React Todo App</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function TodoApp() {
+      const [todos, setTodos] = useState([]);
+      const [newTodo, setNewTodo] = useState("");
+      const [filter, setFilter] = useState("all");
+      const [editingIndex, setEditingIndex] = useState(null);
+      const [editText, setEditText] = useState("");
+
+      useEffect(() => {
+        const savedTodos = localStorage.getItem("todos");
+        if (savedTodos) {
+          setTodos(JSON.parse(savedTodos));
+        }
+      }, []);
+
+      useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(todos));
+      }, [todos]);
+
+      const filteredTodos = todos.filter((todo) => {
+        if (filter === "completed") return todo.completed;
+        if (filter === "pending") return !todo.completed;
+        return true;
+      });
+
+      const addTodo = () => {
+        if (newTodo) {
+          setTodos([...todos, { text: newTodo, completed: false }]);
+          setNewTodo("");
+        }
+      };
+
+      const deleteTodo = (index) => {
+        const updatedTodos = todos.filter((_, i) => i !== index);
+        setTodos(updatedTodos);
+      };
+
+      const toggleCompleted = (index) => {
+        const updatedTodos = [...todos];
+        updatedTodos[index].completed = !updatedTodos[index].completed;
+        setTodos(updatedTodos);
+      };
+
+      const startEditing = (index) => {
+        setEditingIndex(index);
+        setEditText(todos[index].text);
+      };
+
+      const saveEdit = (index) => {
+        const updatedTodos = [...todos];
+        updatedTodos[index].text = editText;
+        setTodos(updatedTodos);
+        setEditingIndex(null);
+      };
+
+      return (
+        <div style={{ paddingTop: "50px", paddingLeft: "20px", paddingRight: "20px" }}>
+          <h1 style={{ textAlign: "center" }}>Todo List</h1>
+
+          <div>
+            <input
+              type="text"
+              value={newTodo}
+              onChange={(e) => setNewTodo(e.target.value)}
+              placeholder="Add new todo"
+            />
+            <button onClick={addTodo}>Add Todo</button>
+          </div>
+
+          <div>
+            <select onChange={(e) => setFilter(e.target.value)}>
+              <option value="all">All</option>
+              <option value="completed">Completed</option>
+              <option value="pending">Pending</option>
+            </select>
+          </div>
+
+          <ul>
+            {filteredTodos.map((item, index) => (
+              <li key={index} style={{ textDecoration: item.completed ? "line-through" : "none" }}>
+                {editingIndex === index ? (
+                  <>
+                    <input
+                      type="text"
+                      value={editText}
+                      onChange={(e) => setEditText(e.target.value)}
+                    />
+                    <button onClick={() => saveEdit(index)}>Save</button>
+                  </>
+                ) : (
+                  <>
+                    <span onClick={() => toggleCompleted(index)} style={{ cursor: "pointer" }}>
+                      {item.text}
+                    </span>
+                    <button onClick={() => deleteTodo(index)}>Delete</button>
+                    <button onClick={() => startEditing(index)}>Edit</button>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<TodoApp />, document.getElementById('root'));
+  </script>
+</body>
+</html>
