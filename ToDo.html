@@ -104,6 +104,12 @@
         }
       };
 
+      const handleKeyPress = (e) => {
+        if (e.key === "Enter" && newTodo) {
+          addTodo();
+        }
+      };
+
       const deleteTodo = (index) => {
         const updatedTodos = todos.filter((_, i) => i !== index);
         setTodos(updatedTodos);
@@ -127,6 +133,12 @@
         setEditingIndex(null);
       };
 
+      const handleEditKeyPress = (e, index) => {
+        if (e.key === "Enter") {
+          saveEdit(index);
+        }
+      };
+
       return (
         <div style={{ paddingTop: "50px", paddingLeft: "20px", paddingRight: "20px" }}>
           <h1 style={{ textAlign: "center" }}>Todo List</h1>
@@ -136,6 +148,7 @@
               type="text"
               value={newTodo}
               onChange={(e) => setNewTodo(e.target.value)}
+              onKeyPress={handleKeyPress}
               placeholder="Add new todo"
             />
             <button onClick={addTodo}>Add Todo</button>
@@ -158,6 +171,7 @@
                       type="text"
                       value={editText}
                       onChange={(e) => setEditText(e.target.value)}
+                      onKeyPress={(e) => handleEditKeyPress(e, index)}
                     />
                     <button onClick={() => saveEdit(index)}>Save</button>
                   </>
