@@ -39,30 +39,94 @@
     ul {
       list-style: none;
       padding: 0;
+      width: 100%;
     }
 
     li {
-      padding: 5px;
+      padding: 8px;
       font-size: 18px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+      border-bottom: 1px solid #eee;
     }
 
-    li.completed {
+    .todo-text {
+      flex-grow: 1;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .completed {
       text-decoration: line-through;
       color: gray;
     }
 
+    .todo-buttons {
+      display: flex;
+    }
+
     button {
-      background-color: #ff4d4d;
-      color: white;
-      border: none;
+      margin: 0 3px;
       padding: 5px 10px;
       cursor: pointer;
       font-size: 14px;
       border-radius: 5px;
+      border: none;
     }
 
-    button:hover {
+    button.delete-btn {
+      background-color: #ff4d4d;
+      color: white;
+    }
+
+    button.delete-btn:hover {
       background-color: #ff1a1a;
+    }
+
+    button.edit-btn {
+      background-color: #4d94ff;
+      color: white;
+    }
+
+    button.edit-btn:hover {
+      background-color: #1a75ff;
+    }
+
+    button.complete-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    button.complete-btn:hover {
+      background-color: #3e8e41;
+    }
+
+    button.save-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background-color: #ccc;
+      margin: 30px 0 20px 0;
+    }
+
+    .ai-selector {
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .ai-selector h3 {
+      margin-top: 0;
+      color: #333;
+      text-align: left;
+    }
+
+    .ai-selector select {
+      width: 200px;
     }
   </style>
   <title>React Todo App</title>
@@ -79,6 +143,20 @@
       const [filter, setFilter] = useState("all");
       const [editingIndex, setEditingIndex] = useState(null);
       const [editText, setEditText] = useState("");
+      const [selectedAiSite, setSelectedAiSite] = useState("");
+
+      const aiSites = [
+        { name: "-- AI 사이트 선택 --", url: "" },
+        { name: "ChatGPT", url: "https://chat.openai.com" },
+        { name: "Claude", url: "https://claude.ai" },
+        { name: "Gemini", url: "https://gemini.google.com/app?hl=ko" },
+        { name: "DeeL" , url:"https://www.deepl.com/ko/translator"},
+        {name: "Perplexity", url:"https://www.perplexity.ai/"},
+        {name: "Lilys", url:"https://lilys.ai/"},
+        {name: "Kling", url:"https://klingai.com/"},
+        { name: "Copilot", url: "https://copilot.microsoft.com/chats/kqAN6UoUDcAFMABaPZqua" },
+     
+      ];
 
       useEffect(() => {
         const savedTodos = localStorage.getItem("todos");
@@ -90,6 +168,13 @@
       useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(todos));
       }, [todos]);
+
+      useEffect(() => {
+        if (selectedAiSite) {
+          window.open(selectedAiSite, '_blank');
+          setSelectedAiSite("");
+        }
+      }, [selectedAiSite]);
 
       const filteredTodos = todos.filter((todo) => {
         if (filter === "completed") return todo.completed;
@@ -139,22 +224,27 @@
         }
       };
 
+      const handleAiSiteChange = (e) => {
+        setSelectedAiSite(e.target.value);
+      };
+
       return (
-        <div style={{ paddingTop: "50px", paddingLeft: "20px", paddingRight: "20px" }}>
+        <div style={{ paddingTop: "50px", paddingLeft: "20px", paddingRight: "20px", maxWidth: "800px", width: "100%" }}>
           <h1 style={{ textAlign: "center" }}>Todo List</h1>
 
-          <div>
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
             <input
               type="text"
               value={newTodo}
               onChange={(e) => setNewTodo(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Add new todo"
+              style={{ flexGrow: 1, marginRight: "10px" }}
             />
             <button onClick={addTodo}>Add Todo</button>
           </div>
 
-          <div>
+          <div style={{ marginBottom: "20px" }}>
             <select onChange={(e) => setFilter(e.target.value)}>
               <option value="all">All</option>
               <option value="completed">Completed</option>
@@ -163,30 +253,65 @@
           </div>
 
           <ul>
-            {filteredTodos.map((item, index) => (
-              <li key={index} style={{ textDecoration: item.completed ? "line-through" : "none" }}>
-                {editingIndex === index ? (
-                  <>
-                    <input
-                      type="text"
-                      value={editText}
-                      onChange={(e) => setEditText(e.target.value)}
-                      onKeyPress={(e) => handleEditKeyPress(e, index)}
-                    />
-                    <button onClick={() => saveEdit(index)}>Save</button>
-                  </>
-                ) : (
-                  <>
-                    <span onClick={() => toggleCompleted(index)} style={{ cursor: "pointer" }}>
-                      {item.text}
-                    </span>
-                    <button onClick={() => deleteTodo(index)}>Delete</button>
-                    <button onClick={() => startEditing(index)}>Edit</button>
-                  </>
-                )}
-              </li>
-            ))}
+            {filteredTodos.map((item, index) => {
+              // 실제 배열에서의 인덱스 찾기
+              const originalIndex = todos.findIndex(todo => todo === item);
+              
+              return (
+                <li key={index}>
+                  {editingIndex === originalIndex ? (
+                    <>
+                      <input
+                        type="text"
+                        value={editText}
+                        onChange={(e) => setEditText(e.target.value)}
+                        onKeyPress={(e) => handleEditKeyPress(e, originalIndex)}
+                        style={{ flexGrow: 1 }}
+                      />
+                      <button className="save-btn" onClick={() => saveEdit(originalIndex)}>Save</button>
+                    </>
+                  ) : (
+                    <>
+                      <span 
+                        className={`todo-text ${item.completed ? "completed" : ""}`}
+                        onClick={() => toggleCompleted(originalIndex)}
+                      >
+                        {item.text}
+                      </span>
+                      <div className="todo-buttons">
+                        <button 
+                          className="complete-btn" 
+                          onClick={() => toggleCompleted(originalIndex)}
+                        >
+                          {item.completed ? "Undo" : "Complete"}
+                        </button>
+                        <button className="edit-btn" onClick={() => startEditing(originalIndex)}>Edit</button>
+                        <button className="delete-btn" onClick={() => deleteTodo(originalIndex)}>Delete</button>
+                      </div>
+                    </>
+                  )}
+                </li>
+              );
+            })}
           </ul>
+
+          {/* 구분선 추가 */}
+          <div className="divider"></div>
+
+          {/* AI 사이트 선택기 추가 */}
+          <div className="ai-selector">
+            <h3>AI 사이트 바로가기</h3>
+            <select 
+              value={selectedAiSite} 
+              onChange={handleAiSiteChange}
+            >
+              {aiSites.map((site, index) => (
+                <option key={index} value={site.url}>
+                  {site.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       );
     }
