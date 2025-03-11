@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>상식 퀴즈 게임</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      margin-top: 80px;
+      padding: 0;
+    }
+     
+    .text-box {
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    
+    .score-history {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      max-width: 400px;
+    }
+    
+    .score-card {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      background-color: #f5f5f5;
+    }
+    
+    .score-improvement {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    
+    .improvement-positive {
+      color: #4CAF50;
+    }
+    
+    .improvement-negative {
+      color: #f44336;
+    }
+    
+    .improvement-neutral {
+      color: #757575;
+    }
+
+    .todo-list {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      max-width: 400px;
+    }
+
+    .todo-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .todo-item button {
+      background-color: #ff4444;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    
+    .quiz-container {
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      width: 80%;
+      max-width: 600px;
+    }
+    
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin: 15px 0;
+    }
+    
+    .stats p {
+      font-weight: bold;
+    }
+    
+    input[type="text"] {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 100%;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    
+    .button-container {
+      display: flex;
+      gap: 10px;
+    }
+    
+    button {
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    button:hover {
+      opacity: 0.9;
+    }
+           
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- React and ReactDOM libraries -->
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- App code in Babel script -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function ScoreHistory({ scoreHistory }) {
+      const calculateImprovement = (current, previous) => {
+        if (!previous) return null;
+        
+        const accuracyPrevious = previous.correct / (previous.correct + previous.incorrect) * 100 || 0;
+        const accuracyCurrent = current.correct / (current.correct + current.incorrect) * 100 || 0;
+        
+        return (accuracyCurrent - accuracyPrevious).toFixed(1);
+      };
+      
+      return (
+        <div className="score-history">
+          <h3>점수 기록</h3>
+          {scoreHistory.length === 0 ? (
+            <p>기록이 없습니다.</p>
+          ) : (
+            scoreHistory.map((record, index) => {
+              const improvement = index > 0 
+                ? calculateImprovement(record, scoreHistory[index - 1]) 
+                : null;
+                
+              let improvementClass = 'improvement-neutral';
+              if (improvement > 0) improvementClass = 'improvement-positive';
+              if (improvement < 0) improvementClass = 'improvement-negative';
+              
+              return (
+                <div key={record.date} className="score-card">
+                  <div><strong>{record.date}</strong></div>
+                  <div>정답: {record.correct} / 오답: {record.incorrect}</div>
+                  <div>정확도: {(record.correct / (record.correct + record.incorrect) * 100 || 0).toFixed(1)}%</div>
+                  
+                  {improvement !== null && (
+                    <div className={`score-improvement ${improvementClass}`}>
+                      전일 대비: {improvement > 0 ? '+' : ''}{improvement}%
+                    </div>
+                  )}
+                </div>
+              );
+            })
+          )}
+        </div>
+      );
+    }
+
+    function TodoList({ todos, onRemove }) {
+      return (
+        <div className="todo-list">
+          <h3>복습할 문제</h3>
+          {todos.length === 0 ? (
+            <p>복습 리스트가 비어 있습니다.</p>
+          ) : (
+            todos.map((todo, index) => (
+              <div key={index} className="todo-item">
+                <div>
+                  <strong>{todo.phrase}</strong>: {todo.meaning}
+                </div>
+                <button onClick={() => onRemove(index)}>삭제</button>
+              </div>
+            ))
+          )}
+        </div>
+      );
+    }
+
+    function MyComponent({ verbs }) {
+      const [inputValue, setInputValue] = useState('');
+      const [result, setResult] = useState('');
+      const [score, setScore] = useState(0);
+      const [incorrectScore, setIncorrectScore] = useState(0);
+      const [currentVerb, setCurrentVerb] = useState(null);
+      const [usedVerbs, setUsedVerbs] = useState([]);
+      const [gameOver, setGameOver] = useState(false);
+      const [incorrectAnswers, setIncorrectAnswers] = useState([]);
+      const [todos, setTodos] = useState([]);
+      const [scoreHistory, setScoreHistory] = useState([]);
+      const [showHint, setShowHint] = useState(false);
+
+      const addToTodo = () => {
+        if (currentVerb && !todos.some(todo => todo.phrase === currentVerb.문제)) {
+          setTodos([...todos, { phrase: currentVerb.문제, meaning: currentVerb.답 }]);
+        }
+      };
+
+      const removeTodo = (index) => {
+        setTodos(todos.filter((_, i) => i !== index));
+      };
+
+      const getNewVerb = () => {
+        const remainingVerbs = verbs.filter(verb => !usedVerbs.includes(verb.문제));
+        if (remainingVerbs.length === 0) {
+          setGameOver(true);
+          return;
+        }
+        const randomIndex = Math.floor(Math.random() * remainingVerbs.length);
+        const newVerb = remainingVerbs[randomIndex];
+        setUsedVerbs([...usedVerbs, newVerb.문제]);
+        setCurrentVerb(newVerb);
+        setShowHint(false);
+      };
+
+      const resetGame = () => {
+        setInputValue('');
+        setResult('');
+        setScore(0);
+        setIncorrectScore(0);
+        setCurrentVerb(null);
+        setUsedVerbs([]);
+        setGameOver(false);
+        setIncorrectAnswers([]);
+        setShowHint(false);
+        getNewVerb();
+      };
+
+      useEffect(() => {
+        getNewVerb();
+      }, []);
+
+      const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+      };
+
+      const handleSearch = () => {
+        if (currentVerb) {
+          if (inputValue.trim().toLowerCase() === currentVerb.답.toLowerCase()) {
+            setScore(score + 1);
+            setResult('정답입니다!');
+            setInputValue('');
+            setTimeout(() => {
+              getNewVerb();
+            }, 500);
+          } else {
+            // 힌트가 보여졌는데도 틀린 경우에만 틀린 답으로 카운트
+            if (showHint) {
+              setIncorrectScore(incorrectScore + 1);
+              setIncorrectAnswers([...incorrectAnswers, { phrase: currentVerb.문제, meaning: currentVerb.답 }]);
+              setResult(`틀렸습니다. 정확히 "${currentVerb.답}"라고 입력해주세요.`);
+            } else {
+              setResult('틀렸습니다. 복습하기 버튼을 눌러 힌트를 확인하세요.');
+            }
+          }
+        }
+      };
+
+      const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+          handleSearch();
+        }
+      };
+
+      const toggleHint = () => {
+        setShowHint(true);
+        setResult(`정답은 "${currentVerb.답}" 입니다. 정확히 입력해주세요.`);
+      };
+
+      return (
+        <div className="quiz-container">
+          {gameOver ? (
+            <div>
+              <h2>게임 종료!</h2>
+              <div className="stats">
+                <p>최종 점수: {score}</p>
+                <p>틀린 답: {incorrectScore}</p>
+              </div>
+              <h3>틀린 문제</h3>
+              {incorrectAnswers.length === 0 ? (
+                <p>모든 문제를 맞추셨습니다! 축하합니다!</p>
+              ) : (
+                <ul>
+                  {incorrectAnswers.map((answer, index) => (
+                    <li key={index}>
+                      <strong>{answer.phrase}</strong>: {answer.meaning}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <button 
+                onClick={resetGame}
+                style={{
+                  padding: '10px 20px',
+                  fontSize: '16px',
+                  backgroundColor: '#4CAF50',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                  marginTop: '10px'
+                }}
+              >
+                다시 시작하기
+              </button>
+            </div>
+          ) : (
+            currentVerb && (
+              <div>
+                <h2>상식 퀴즈</h2>
+                <p style={{ fontSize: '18px', fontWeight: 'bold' }}>질문: {currentVerb.문제}</p>
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyPress}
+                  placeholder="답을 입력하세요"
+                />
+                <div className="button-container">
+                  <button 
+                    onClick={handleSearch}
+                    style={{
+                      backgroundColor: '#4CAF50',
+                      color: 'white',
+                      border: 'none',
+                      padding: '8px 15px',
+                      borderRadius: '4px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    제출
+                  </button>
+                  <button 
+                    onClick={toggleHint}
+                    style={{
+                      backgroundColor: '#2196F3',
+                      color: 'white',
+                      border: 'none',
+                      padding: '8px 15px',
+                      borderRadius: '4px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    복습하기
+                  </button>
+                  <button 
+                    onClick={addToTodo}
+                    style={{
+                      backgroundColor: '#ff9800',
+                      color: 'white',
+                      border: 'none',
+                      padding: '8px 15px',
+                      borderRadius: '4px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    복습 리스트에 추가
+                  </button>
+                </div>
+                
+                <div className="text-box">
+                  <p>{result}</p>
+                </div>
+                <div className="stats">
+                  <p>점수: {score}</p>
+                  <p>틀린 답: {incorrectScore}</p>
+                </div>
+              </div>
+            )
+          )}
+          
+          <TodoList todos={todos} onRemove={removeTodo} />
+        </div>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <h1>상식 퀴즈 게임</h1>
+          <MyComponent verbs={[
+            { 문제: '우리나라의 수도는?', 답: '서울' },
+            { 문제: '세계에서 가장 넓은 대륙은?', 답: '아시아' },
+            { 문제: '물의 화학식은?', 답: 'H2O' },
+            { 문제: '태양계에서 가장 큰 행성은?', 답: '목성' },
+            { 문제: '인간의 정상 체온은 섭씨 몇 도?', 답: '36.5' },
+            { 문제: '세계에서 인구가 가장 많은 나라는?', 답: '중국' },
+            { 문제: '1년은 몇 일?', 답: '365' },
+            { 문제: '사람의 심장은 몇 개의 방으로 이루어져 있나?', 답: '4' },
+            { 문제: '지구에서 가장 깊은 바다는?', 답: '마리아나 해구' },
+            { 문제: '세계 2차 대전이 끝난 연도는?', 답: '1945' }
+          ]} />
+        </div>
+      );
+    }
+
+    // Render the App component
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
