@@ -23,38 +23,6 @@
       font-weight: bold;
     }
     
-    .score-history {
-      margin-top: 20px;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      max-width: 400px;
-    }
-    
-    .score-card {
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      background-color: #f5f5f5;
-    }
-    
-    .score-improvement {
-      font-weight: bold;
-      margin-top: 5px;
-    }
-    
-    .improvement-positive {
-      color: #4CAF50;
-    }
-    
-    .improvement-negative {
-      color: #f44336;
-    }
-    
-    .improvement-neutral {
-      color: #757575;
-    }
-
     .todo-list {
       margin-top: 20px;
       padding: 20px;
@@ -109,9 +77,15 @@
       font-size: 16px;
     }
     
-    .button-container {
-      display: flex;
-      gap: 10px;
+    .next-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
     }
     
     button {
@@ -122,7 +96,6 @@
     button:hover {
       opacity: 0.9;
     }
-           
   </style>
 </head>
 <body>
@@ -135,291 +108,420 @@
 
   <!-- App code in Babel script -->
   <script type="text/babel">
-    const { useState, useEffect } = React;
+     const { useState, useEffect, useRef } = React;
 
-    function ScoreHistory({ scoreHistory }) {
-      const calculateImprovement = (current, previous) => {
-        if (!previous) return null;
-        
-        const accuracyPrevious = previous.correct / (previous.correct + previous.incorrect) * 100 || 0;
-        const accuracyCurrent = current.correct / (current.correct + current.incorrect) * 100 || 0;
-        
-        return (accuracyCurrent - accuracyPrevious).toFixed(1);
-      };
-      
-      return (
-        <div className="score-history">
-          <h3>점수 기록</h3>
-          {scoreHistory.length === 0 ? (
-            <p>기록이 없습니다.</p>
-          ) : (
-            scoreHistory.map((record, index) => {
-              const improvement = index > 0 
-                ? calculateImprovement(record, scoreHistory[index - 1]) 
-                : null;
-                
-              let improvementClass = 'improvement-neutral';
-              if (improvement > 0) improvementClass = 'improvement-positive';
-              if (improvement < 0) improvementClass = 'improvement-negative';
-              
-              return (
-                <div key={record.date} className="score-card">
-                  <div><strong>{record.date}</strong></div>
-                  <div>정답: {record.correct} / 오답: {record.incorrect}</div>
-                  <div>정확도: {(record.correct / (record.correct + record.incorrect) * 100 || 0).toFixed(1)}%</div>
-                  
-                  {improvement !== null && (
-                    <div className={`score-improvement ${improvementClass}`}>
-                      전일 대비: {improvement > 0 ? '+' : ''}{improvement}%
-                    </div>
-                  )}
-                </div>
-              );
-            })
-          )}
-        </div>
-      );
-    }
-
-    function TodoList({ todos, onRemove }) {
-      return (
-        <div className="todo-list">
-          <h3>복습할 문제</h3>
-          {todos.length === 0 ? (
-            <p>복습 리스트가 비어 있습니다.</p>
-          ) : (
-            todos.map((todo, index) => (
-              <div key={index} className="todo-item">
-                <div>
-                  <strong>{todo.phrase}</strong>: {todo.meaning}
-                </div>
-                <button onClick={() => onRemove(index)}>삭제</button>
-              </div>
-            ))
-          )}
-        </div>
-      );
-    }
-
-    function MyComponent({ verbs }) {
-      const [inputValue, setInputValue] = useState('');
-      const [result, setResult] = useState('');
-      const [score, setScore] = useState(0);
-      const [incorrectScore, setIncorrectScore] = useState(0);
-      const [currentVerb, setCurrentVerb] = useState(null);
-      const [usedVerbs, setUsedVerbs] = useState([]);
-      const [gameOver, setGameOver] = useState(false);
-      const [incorrectAnswers, setIncorrectAnswers] = useState([]);
-      const [todos, setTodos] = useState([]);
-      const [scoreHistory, setScoreHistory] = useState([]);
-      const [showHint, setShowHint] = useState(false);
-
-      const addToTodo = () => {
-        if (currentVerb && !todos.some(todo => todo.phrase === currentVerb.문제)) {
-          setTodos([...todos, { phrase: currentVerb.문제, meaning: currentVerb.답 }]);
-        }
-      };
-
-      const removeTodo = (index) => {
-        setTodos(todos.filter((_, i) => i !== index));
-      };
-
-      const getNewVerb = () => {
-        const remainingVerbs = verbs.filter(verb => !usedVerbs.includes(verb.문제));
-        if (remainingVerbs.length === 0) {
-          setGameOver(true);
-          return;
-        }
-        const randomIndex = Math.floor(Math.random() * remainingVerbs.length);
-        const newVerb = remainingVerbs[randomIndex];
-        setUsedVerbs([...usedVerbs, newVerb.문제]);
-        setCurrentVerb(newVerb);
-        setShowHint(false);
-      };
-
-      const resetGame = () => {
-        setInputValue('');
-        setResult('');
-        setScore(0);
-        setIncorrectScore(0);
-        setCurrentVerb(null);
-        setUsedVerbs([]);
-        setGameOver(false);
-        setIncorrectAnswers([]);
-        setShowHint(false);
-        getNewVerb();
-      };
-
-      useEffect(() => {
-        getNewVerb();
-      }, []);
-
-      const handleInputChange = (event) => {
-        setInputValue(event.target.value);
-      };
-
-      const handleSearch = () => {
-        if (currentVerb) {
-          if (inputValue.trim().toLowerCase() === currentVerb.답.toLowerCase()) {
-            setScore(score + 1);
-            setResult('정답입니다!');
-            setInputValue('');
-            setTimeout(() => {
-              getNewVerb();
-            }, 500);
-          } else {
-            // 힌트가 보여졌는데도 틀린 경우에만 틀린 답으로 카운트
-            if (showHint) {
-              setIncorrectScore(incorrectScore + 1);
-              setIncorrectAnswers([...incorrectAnswers, { phrase: currentVerb.문제, meaning: currentVerb.답 }]);
-              setResult(`틀렸습니다. 정확히 "${currentVerb.답}"라고 입력해주세요.`);
-            } else {
-              setResult('틀렸습니다. 복습하기 버튼을 눌러 힌트를 확인하세요.');
-            }
-          }
-        }
-      };
-
-      const handleKeyPress = (event) => {
-        if (event.key === 'Enter') {
-          handleSearch();
-        }
-      };
-
-      const toggleHint = () => {
-        setShowHint(true);
-        setResult(`정답은 "${currentVerb.답}" 입니다. 정확히 입력해주세요.`);
-      };
-
-      return (
-        <div className="quiz-container">
-          {gameOver ? (
+// TodoList 컴포넌트는 그대로 유지
+function TodoList({ todos, onRemove }) {
+  return (
+    <div className="todo-list">
+      <h3>복습할 문제</h3>
+      {todos.length === 0 ? (
+        <p>복습 리스트가 비어 있습니다.</p>
+      ) : (
+        todos.map((todo, index) => (
+          <div key={index} className="todo-item">
             <div>
-              <h2>게임 종료!</h2>
-              <div className="stats">
-                <p>최종 점수: {score}</p>
-                <p>틀린 답: {incorrectScore}</p>
-              </div>
-              <h3>틀린 문제</h3>
-              {incorrectAnswers.length === 0 ? (
-                <p>모든 문제를 맞추셨습니다! 축하합니다!</p>
-              ) : (
-                <ul>
-                  {incorrectAnswers.map((answer, index) => (
-                    <li key={index}>
-                      <strong>{answer.phrase}</strong>: {answer.meaning}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <button 
-                onClick={resetGame}
-                style={{
-                  padding: '10px 20px',
-                  fontSize: '16px',
-                  backgroundColor: '#4CAF50',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '5px',
-                  cursor: 'pointer',
-                  marginTop: '10px'
-                }}
-              >
-                다시 시작하기
-              </button>
+              <strong>{todo.phrase}</strong>: {todo.meaning}
+              {todo.time && <span style={{ marginLeft: '10px', color: '#666' }}>(소요시간: {todo.time})</span>}
             </div>
-          ) : (
-            currentVerb && (
-              <div>
-                <h2>상식 퀴즈</h2>
-                <p style={{ fontSize: '18px', fontWeight: 'bold' }}>질문: {currentVerb.문제}</p>
-                <input
-                  type="text"
-                  value={inputValue}
-                  onChange={handleInputChange}
-                  onKeyDown={handleKeyPress}
-                  placeholder="답을 입력하세요"
-                />
-                <div className="button-container">
-                  <button 
-                    onClick={handleSearch}
-                    style={{
-                      backgroundColor: '#4CAF50',
-                      color: 'white',
-                      border: 'none',
-                      padding: '8px 15px',
-                      borderRadius: '4px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    제출
-                  </button>
-                  <button 
-                    onClick={toggleHint}
-                    style={{
-                      backgroundColor: '#2196F3',
-                      color: 'white',
-                      border: 'none',
-                      padding: '8px 15px',
-                      borderRadius: '4px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    복습하기
-                  </button>
-                  <button 
-                    onClick={addToTodo}
-                    style={{
-                      backgroundColor: '#ff9800',
-                      color: 'white',
-                      border: 'none',
-                      padding: '8px 15px',
-                      borderRadius: '4px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    복습 리스트에 추가
-                  </button>
-                </div>
-                
-                <div className="text-box">
-                  <p>{result}</p>
-                </div>
-                <div className="stats">
-                  <p>점수: {score}</p>
-                  <p>틀린 답: {incorrectScore}</p>
-                </div>
-              </div>
-            )
-          )}
-          
-          <TodoList todos={todos} onRemove={removeTodo} />
-        </div>
-      );
-    }
+            <button onClick={() => onRemove(index)}>삭제</button>
+          </div>
+        ))
+      )}
+    </div>
+  );
+}
 
-    function App() {
-      return (
+// 기존 MyComponent를 QuizGame으로 이름 변경하고 타이틀 prop 추가
+function QuizGame({ verbs, title }) {
+  const [inputValue, setInputValue] = useState('');
+  const [result, setResult] = useState('');
+  const [score, setScore] = useState(0);
+  const [incorrectScore, setIncorrectScore] = useState(0);
+  const [currentVerb, setCurrentVerb] = useState(null);
+  const [usedVerbs, setUsedVerbs] = useState([]);
+  const [gameOver, setGameOver] = useState(false);
+  const [incorrectAnswers, setIncorrectAnswers] = useState([]);
+  const [todos, setTodos] = useState([]);
+  
+  // 전체 게임 타이머
+  const [startTime, setStartTime] = useState(null);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const timerRef = useRef(null);
+  
+  // 문제별 타이머
+  const [questionStartTime, setQuestionStartTime] = useState(null);
+  const [questionElapsedTime, setQuestionElapsedTime] = useState(0);
+  const questionTimerRef = useRef(null);
+  
+      // 시간 제한을 둔 포맷팅 함수
+const formatTime = (time) => {
+  const totalSeconds = Math.floor(time / 1000);
+  const seconds = totalSeconds % 60;
+  const minutes = Math.floor(totalSeconds / 60) % 60;
+  
+  return `${minutes < 10 ? '0' + minutes : minutes} : ${seconds < 10 ? '0' + seconds : seconds}`;
+};
+  
+  // 타이머 시작 함수
+  const startTimer = () => {
+    if (!isTimerRunning) {
+      setStartTime(Date.now() - elapsedTime);
+      setIsTimerRunning(true);
+      timerRef.current = setInterval(() => {
+        setElapsedTime(Date.now() - startTime);
+      }, 100);
+    }
+  };
+
+  // 타이머 정지 함수
+  const stopTimer = () => {
+    clearInterval(timerRef.current);
+    setIsTimerRunning(false);
+  };
+
+  // 타이머 리셋 함수
+  const resetTimer = () => {
+    clearInterval(timerRef.current);
+    setElapsedTime(0);
+    setStartTime(Date.now());
+    setIsTimerRunning(true);
+    timerRef.current = setInterval(() => {
+      setElapsedTime(Date.now() - startTime);
+    }, 100);
+  };
+  
+  // 문제별 타이머 시작 함수
+  const startQuestionTimer = () => {
+    clearInterval(questionTimerRef.current);
+    setQuestionStartTime(Date.now());
+    setQuestionElapsedTime(0);
+    questionTimerRef.current = setInterval(() => {
+      setQuestionElapsedTime(Date.now() - questionStartTime);
+    }, 100);
+  };
+
+  useEffect(() => {
+    getNewVerb();
+    resetTimer(); // 게임 시작 시 타이머 시작
+    
+    return () => {
+      clearInterval(timerRef.current); // 컴포넌트 언마운트 시 타이머 정리
+      clearInterval(questionTimerRef.current);
+    };
+  }, []);
+
+  const addToTodo = (time) => {
+    if (currentVerb && !todos.some(todo => todo.phrase === currentVerb.문제)) {
+      setTodos([...todos, { 
+        phrase: currentVerb.문제, 
+        meaning: currentVerb.답,
+        time: time || formatTime(questionElapsedTime)
+      }]);
+    }
+  };
+
+  const removeTodo = (index) => {
+    setTodos(todos.filter((_, i) => i !== index));
+  };
+
+  const getNewVerb = () => {
+    const remainingVerbs = verbs.filter(verb => !usedVerbs.includes(verb.문제));
+    if (remainingVerbs.length === 0) {
+      setGameOver(true);
+      stopTimer(); // 게임 종료 시 타이머 정지
+      clearInterval(questionTimerRef.current);
+      return;
+    }
+    const randomIndex = Math.floor(Math.random() * remainingVerbs.length);
+    const newVerb = remainingVerbs[randomIndex];
+    setUsedVerbs([...usedVerbs, newVerb.문제]);
+    setCurrentVerb(newVerb);
+    setInputValue('');
+    setResult('');
+    startQuestionTimer(); // 새로운 문제가 시작되면 문제별 타이머도 시작
+  };
+
+  const resetGame = () => {
+    setInputValue('');
+    setResult('');
+    setScore(0);
+    setIncorrectScore(0);
+    setCurrentVerb(null);
+    setUsedVerbs([]);
+    setGameOver(false);
+    setIncorrectAnswers([]);
+    resetTimer(); // 게임 재시작 시 타이머 리셋
+    getNewVerb();
+  };
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleNextQuestion();
+    }
+  };
+
+  // 다음 문제로 넘어가는 함수
+  const handleNextQuestion = () => {
+    if (!currentVerb) return;
+    
+    // 입력값이 있으면 정답 체크
+    if (inputValue.trim() !== '') {
+      if (inputValue.trim().toLowerCase() === currentVerb.답.toLowerCase()) {
+        setScore(score + 1);
+        setResult(`정답입니다!`);
+        setTimeout(() => {
+          getNewVerb();
+        }, 500);
+        return;
+      }
+    }
+    
+    // 입력값이 없거나 틀린 경우
+    setIncorrectScore(incorrectScore + 1);
+    setIncorrectAnswers([...incorrectAnswers, { 
+      phrase: currentVerb.문제, 
+      meaning: currentVerb.답
+    }]);
+    
+    // 입력값이 없는 경우
+    if (inputValue.trim() === '') {
+      setResult(`정답은 "${currentVerb.답}" 입니다.`);
+    } else {
+      // 틀린 경우
+      setResult(`틀렸습니다. 정답은 "${currentVerb.답}" 입니다.`);
+    }
+    
+    addToTodo(); // 복습 리스트에 추가
+    
+    // 잠시 후 다음 문제로 이동
+    setTimeout(() => {
+      getNewVerb();
+    }, 1000);
+  };
+
+  return (
+    <div className="quiz-container">
+      {gameOver ? (
         <div>
-          <h1>상식 퀴즈 게임</h1>
-          <MyComponent verbs={[
-            { 문제: '우리나라의 수도는?', 답: '서울' },
-            { 문제: '세계에서 가장 넓은 대륙은?', 답: '아시아' },
-            { 문제: '물의 화학식은?', 답: 'H2O' },
-            { 문제: '태양계에서 가장 큰 행성은?', 답: '목성' },
-            { 문제: '인간의 정상 체온은 섭씨 몇 도?', 답: '36.5' },
-            { 문제: '세계에서 인구가 가장 많은 나라는?', 답: '중국' },
-            { 문제: '1년은 몇 일?', 답: '365' },
-            { 문제: '사람의 심장은 몇 개의 방으로 이루어져 있나?', 답: '4' },
-            { 문제: '지구에서 가장 깊은 바다는?', 답: '마리아나 해구' },
-            { 문제: '세계 2차 대전이 끝난 연도는?', 답: '1945' }
-          ]} />
+          <h2>게임 종료!</h2>
+          <div className="stats">
+            <p>최종 점수: {score}</p>
+            <p>틀린 답: {incorrectScore}</p>
+            <p>총 소요 시간: {formatTime(elapsedTime)}</p>
+          </div>
+          <h3>틀린 문제</h3>
+          {incorrectAnswers.length === 0 ? (
+            <p>모든 문제를 맞추셨습니다! 축하합니다!</p>
+          ) : (
+            <ul>
+              {incorrectAnswers.map((answer, index) => (
+                <li key={index}>
+                  <strong>{answer.phrase}</strong>: {answer.meaning}
+                </li>
+              ))}
+            </ul>
+          )}
+          <button 
+            onClick={resetGame}
+            className="next-button"
+            style={{ marginTop: '10px' }}
+          >
+            다시 시작하기
+          </button>
         </div>
-      );
-    }
+      ) : (
+        currentVerb && (
+          <div>
+            <h2>{title || "상식 퀴즈"}</h2>
+            <p style={{ fontSize: '18px', fontWeight: 'bold' }}>질문: {currentVerb.문제}</p>
+            <input
+              type="text"
+              value={inputValue}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyPress}
+              placeholder="답을 입력하세요"
+            />
+            <button 
+              className="next-button"
+              onClick={handleNextQuestion}
+            >
+              다음
+            </button>
+            
+            <div className="text-box" style={{ minHeight: '50px', display: 'flex', alignItems: 'center', marginTop: '15px' }}>
+              <p style={{ fontWeight: 'bold' }}>{result}</p>
+            </div>
+            <div className="stats" style={{ display: 'flex', justifyContent: 'space-around', margin: '15px 0' }}>
+              <p>정답: {score}</p>
+              <p>오답: {incorrectScore}</p>
+            </div>
+          </div>
+        )
+      )}
+      
+      <TodoList todos={todos} onRemove={removeTodo} />
+    </div>
+  );
+}
 
-    // Render the App component
-    ReactDOM.render(<App />, document.getElementById('root'));
+// 새로운 메인 컴포넌트 추가
+function QuizApp() {
+  // 선택된 퀴즈 상태 관리
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
+  
+  // 퀴즈 데이터 (예시)
+  const quizzes = [
+    {
+      id: 1,
+      title: "상식 퀴즈 1",
+      verbs: [
+        { 문제: "대한민국의 수도는?", 답: "서울" },
+        { 문제: "세계에서 가장 큰 대륙은?", 답: "아시아" },
+        { 문제: "물의 화학식은?", 답: "H2O" },
+  
+        
+      ]
+    },
+    {
+      id: 2,
+      title: "상식 퀴즈 2",
+      verbs: [
+      { 문제: "자랑하다", 답: "Show off" },  
+{ 문제: "참석하다", 답: "Show up" },  
+{ 문제: "예상치 못하게 나타나다 (발견되다), 소리나 온도를 높이다", 답: "Turn up" },  
+{ 문제: "잠시 기다리다", 답: "Hold on" },  
+{ 문제: "대기하다", 답: "Stand by" },  
+{ 문제: "진정하다 정착하다", 답: "Settle down" },  
+{ 문제: "흥분을 가라앉히다", 답: "Calm down" },  
+{ 문제: "버리다", 답: "Throw away" },  
+{ 문제: "줍다 데리러 가다", 답: "Pick up" },  
+{ 문제: "내려주다", 답: "Drop off" },  
+{ 문제: "화해하다", 답: "Make up" },  
+{ 문제: "찾아내다", 답: "Find out" },  
+{ 문제: "망치다", 답: "Mess up" },  
+{ 문제: "엉망으로 만들다 (비속어)", 답: "Screw up" },  
+{ 문제: "벗다", 답: "Take off" },  
+{ 문제: "성장하다", 답: "Grow up" },  
+{ 문제: "돌보다", 답: "Look after" },  
+{ 문제: "책임을 지다", 답: "Take care of" },  
+{ 문제: "조심하다 상대방에게 조심하라고, 건강을 챙기라고 할 때", 답: "Take care" },  
+{ 문제: "위험을 경고하거나, 주의하라고 할 때", 답: "Look out" },
+{ 문제: "위험을 경고하며, 방심하지 말라고 할 때", 답: "Watch out" },
+{ 문제: "처리하다", 답: "Deal with" },  
+{ 문제: "진지하게 돌보고 관심을 가지다", 답: "Care for" },  
+{ 문제: "과도하게 신경 쓰거나 지나치게 걱정하다", 답: "Fuss over" },
+{ 문제: "연애하다", 답: "Go out" },  
+{ 문제: "모이다", 답: "Get together" },  
+{ 문제: "헤어지다", 답: "Break up" },  
+{ 문제: "확인하다", 답: "Check out" },  
+{ 문제: "수속을 밟다", 답: "Check in" },  
+{ 문제: "지지하다 뒤로 물러나다", 답: "Back up" },  
+{ 문제: "단순히 뒤로 물러나다", 답: "Move back" },
+{ 문제: "물리적이거나 비유적으로 한 걸음 뒤로 물러나다", 답: "Step back" },
+{ 문제: "도망가다", 답: "Run away" },  
+{ 문제: "침입하다", 답: "Break in" },  
+{ 문제: "사망하다", 답: "Pass away" },  
+{ 문제: "해가 뜨다, (~ 날)이 다가오다, 예상치 못한 일이 발생하다 ", 답: "Come up" },
+{ 문제: "전쟁, 질병, 화재 등이 갑자기 발생하다, 탈출하다", 답: "Break out" },  
+{ 문제: "다시 연락하다", 답: "Get back" },
+{ 문제: "내려오다", 답: "Come down" },  
+{ 문제: "(병, 감기 등에) 걸리다", 답: "Come down with" },  
+{ 문제: "(~을) 호되게 꾸짖다 (나무라다, 혼내다)", 답: "Come down on" },  
+{ 문제: "잠깐만 기다리다 -긴급상황에서 잠깐 기다리게 할 때-", 답: "Hang on" },  
+{ 문제: "거절하다 (반려하다), (소리, 불빛 등을) 줄이다 (감소시키다)", 답: "Turn down" },  
+{ 문제: "(오프라인으로) 제출하다", 답: "Hand in" },  
+{ 문제: "(온, 오프라인) 제출하다", 답: "Turn in" },  
+{ 문제: "(온라인) 제출하다", 답: "Send in" },  
+{ 문제: "의지하다", 답: "Lean on" },  
+{ 문제: "끊다 (차단하다)", 답: "Cut off" },  
+{ 문제: "운동하다 (문제를 해결하다)", 답: "Work out" },  
+{ 문제: "-개인적인 기억이나 경험- 회고하다", 답: "Look back" },  
+{ 문제: "마무리하다", 답: "Wrap up" },  
+{ 문제: "조사하다", 답: "Look into" },  
+{ 문제: "기억, 감정을 떠올리게 하다 -(돌려놓다)", 답: "Bring back" },  
+{ 문제: "멀리하다 (피하다)", 답: "Keep off" },  
+{ 문제: "출시되다 (공개되다), 제거되다 (빠지다)", 답: "Come out" },  
+{ 문제: "(무언가) 떨어지다 (분리되다), (무언가 예정대로) 진행되다 (성공하다)", 답: "Come off" },  
+{ 문제: "성공하다 (보상받다), (빚을 완전히) 갚다 (청산하다)", 답: "Pay off" },  
+{ 문제: "(결국) ~ 하게 되다", 답: "End up" },  
+{ 문제: "개입하다", 답: "Step in" },  
+{ 문제: "차려입다", 답: "Dress up" }
+
+      ]
+    },
+    {
+      id: 3,
+      title: "영어 단어 퀴즈",
+      verbs: [
+      { 문제: '과대평가하다, 높이 받들다, 우상화하다', 답: 'Put you on a pedestal' },
+      { 문제: '큰 성과를 내다, 대박을 치다, 대성공을 거두다', 답: 'Knock it out of the park' },
+      { 문제: "농땡이 부리기 장난치기 못된 짓하다", 답: "Monkey bussiness" }
+      ]
+    }
+  ];
+
+  // 퀴즈 선택 핸들러
+  const handleSelectQuiz = (quizId) => {
+    // 이미 선택된 퀴즈라면 닫기
+    if (selectedQuiz === quizId) {
+      setSelectedQuiz(null);
+    } else {
+      setSelectedQuiz(quizId);
+    }
+  };
+
+  return (
+    <div className="quiz-app">
+      <h1>퀴즈 앱</h1>
+      
+      {/* 퀴즈 선택 버튼들 */}
+      <div className="quiz-buttons" style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+        {quizzes.map((quiz) => (
+          <button 
+            key={quiz.id}
+            onClick={() => handleSelectQuiz(quiz.id)}
+            className={`quiz-button ${selectedQuiz === quiz.id ? 'active' : ''}`}
+            style={{ 
+              padding: '10px 15px', 
+              backgroundColor: selectedQuiz === quiz.id ? '#4CAF50' : '#f0f0f0',
+              color: selectedQuiz === quiz.id ? 'white' : 'black',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer'
+            }}
+          >
+            {quiz.title}
+          </button>
+        ))}
+      </div>
+      
+      {/* 선택된 퀴즈만 표시 */}
+      {selectedQuiz && (
+        <QuizGame 
+          verbs={quizzes.find(quiz => quiz.id === selectedQuiz).verbs}
+          title={quizzes.find(quiz => quiz.id === selectedQuiz).title}
+        />
+      )}
+      
+      {/* 아무 퀴즈도 선택되지 않았을 때 안내 메시지 */}
+      {!selectedQuiz && (
+        <div className="no-quiz-selected" style={{ textAlign: 'center', padding: '40px' }}>
+          <p>위의 버튼을 클릭하여 퀴즈를 선택해주세요.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// 앱 렌더링
+// Render the App component
+ReactDOM.render(<QuizApp />, document.getElementById('root'));
   </script>
 </body>
 </html>
