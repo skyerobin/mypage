@@ -438,8 +438,7 @@ function QuizApp() {
 { 문제: "(오프라인으로) 제출하다", 답: "Hand in" },  
 { 문제: "(온, 오프라인) 제출하다", 답: "Turn in" },  
 { 문제: "(온라인) 제출하다", 답: "Send in" },  
-{ 문제: "의지하다", 답: "Lean on" },  
-{ 문제: "끊다 (차단하다)", 답: "Cut off" },  
+{ 문제: "의지하다", 답: "Lean on" },    
 { 문제: "운동하다 (문제를 해결하다)", 답: "Work out" },  
 { 문제: "-개인적인 기억이나 경험- 회고하다", 답: "Look back" },  
 { 문제: "마무리하다", 답: "Wrap up" },  
@@ -517,10 +516,11 @@ function QuizApp() {
       {/* 선택된 퀴즈만 표시 */}
       {selectedQuiz && (
         <QuizGame 
-          verbs={quizzes.find(quiz => quiz.id === selectedQuiz).verbs}
-          title={quizzes.find(quiz => quiz.id === selectedQuiz).title}
-        />
-      )}
+        key={selectedQuiz} // 이 줄을 추가하세요
+        verbs={quizzes.find(quiz => quiz.id === selectedQuiz).verbs}
+        title={quizzes.find(quiz => quiz.id === selectedQuiz).title}
+      />
+)}
       
       {/* 아무 퀴즈도 선택되지 않았을 때 안내 메시지 */}
       {!selectedQuiz && (
